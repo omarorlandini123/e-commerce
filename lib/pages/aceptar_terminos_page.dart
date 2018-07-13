@@ -9,6 +9,14 @@ class AceptarTerminosPage extends StatefulWidget {
 }
 
 class _AceptarTerminosPageState extends State<AceptarTerminosPage> {
+  TextStyle estilo(double tamano, Color color) {
+    return new TextStyle(
+      color: color,
+      fontSize: tamano,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,18 +35,49 @@ class _AceptarTerminosPageState extends State<AceptarTerminosPage> {
           padding: const EdgeInsets.all(16.0),
           child: Center(
               child: Row(
-                
-                 verticalDirection: VerticalDirection.down,
-                crossAxisAlignment: CrossAxisAlignment.center,
+            verticalDirection: VerticalDirection.down,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
+            textDirection: TextDirection.ltr,
             children: <Widget>[
-              Text('Haz click en '),
-              Icon(Icons.check, size: 10.0, color: Colors.black),
-              Text(' para aceptar '),
-              Text('Los términos y condiciones'),
-              Text(' de '),
-              Text('Servicios y políticas de privacidad'),
-              Text(' de Freeler Manager'),
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    Text('Haz click en ',
+                        textAlign: TextAlign.center,
+                        style: estilo(24.0, Colors.black)),
+                    Icon(Icons.check, size: 20.0, color: Colors.black),
+                    new RichText(
+                      textAlign: TextAlign.center,
+                      text: new TextSpan(
+                        style: estilo(20.0, Colors.black),
+                        text: 'para aceptar',
+                        children: <TextSpan>[
+                          new TextSpan(
+                              text: ' Los términos y condiciones',
+                              style: new TextStyle(
+                                color: Colors.blue,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline
+                              )),
+                          new TextSpan(text: ' de '),
+                          new TextSpan(
+                              text: 'Servicios y políticas de privacidad',
+                              style: new TextStyle(
+                                color: Colors.blue,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline
+                              )),
+                          new TextSpan(text: ' de Freeler Manager'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ))),
     );

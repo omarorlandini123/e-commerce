@@ -13,23 +13,17 @@ class _LoginPageState extends State<LoginPage> {
     final logo = Hero(
         tag: 'Hero',
         child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: 60.0,
-            //child: Image.asset('assets/imgs/logo.png')
-            )
-            );
+          backgroundColor: Colors.transparent,
+          radius: 60.0,
+          //child: Image.asset('assets/imgs/logo.png')
+        ));
 
-    final lbltelefono = Text(
-      'Número',
-      maxLines: 1,
-      overflow: TextOverflow.fade,
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 18.0,
-        fontStyle: FontStyle.normal
-      ),
-      textAlign: TextAlign.left
-    );
+    final lbltelefono = Text('Número telefónico',
+        maxLines: 1,
+        overflow: TextOverflow.fade,
+        style: TextStyle(
+            color: Colors.black, fontSize: 18.0, fontStyle: FontStyle.normal),
+        textAlign: TextAlign.left);
 
     final telefono = TextFormField(
       keyboardType: TextInputType.number,
@@ -40,8 +34,8 @@ class _LoginPageState extends State<LoginPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    
-    final loginButton = Padding(      
+
+    final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
         borderRadius: BorderRadius.circular(30.0),
@@ -54,16 +48,20 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pushNamed(ValidarNumeroPage.tag);
           },
           color: Colors.purple,
-          child: Text('Solicitar Registro', style: TextStyle(color: Colors.white)),
+          child:
+              Text('Solicitar Registro', style: TextStyle(color: Colors.white)),
         ),
       ),
     );
 
-  
-
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Eres Bienvenido'),
+        
+      ),
       body: Center(
+        
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
@@ -73,12 +71,12 @@ class _LoginPageState extends State<LoginPage> {
               height: 48.0,
             ),
             lbltelefono,
-            telefono, 
+            telefono,
             Container(
-              margin: EdgeInsets.only(left: 100.0),
-              width: 300.0,
-              alignment: Alignment.centerRight,
-               child: loginButton),
+                margin: EdgeInsets.only(left: 100.0),
+                width: 300.0,
+                alignment: Alignment.centerRight,
+                child: loginButton),
           ],
         ),
       ),

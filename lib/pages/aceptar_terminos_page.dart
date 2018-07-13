@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/diseno/ChoiceCard.dart';
 import 'package:ecommerce/pages/login_page.dart';
 
 class AceptarTerminosPage extends StatefulWidget {
   static String tag = 'aceptar-terminos-page';
+
   @override
   _AceptarTerminosPageState createState() => _AceptarTerminosPageState();
 }
@@ -21,11 +21,11 @@ class _AceptarTerminosPageState extends State<AceptarTerminosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Aceptar Términos y Condiciones'),
+        title: Text('Aceptar Términos y Condiciones'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(choices[0].icon),
-            onPressed: () {
+            icon: Icon(Icons.check),
+            onPressed: () {              
               Navigator.of(context).pushNamed(LoginPage.tag);
             },
           ),
@@ -57,20 +57,18 @@ class _AceptarTerminosPageState extends State<AceptarTerminosPage> {
                           new TextSpan(
                               text: ' Los términos y condiciones',
                               style: new TextStyle(
-                                color: Colors.blue,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline
-                              )),
+                                  color: Colors.blue,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline)),
                           new TextSpan(text: ' de '),
                           new TextSpan(
                               text: 'Servicios y políticas de privacidad',
                               style: new TextStyle(
-                                color: Colors.blue,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline
-                              )),
+                                  color: Colors.blue,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline)),
                           new TextSpan(text: ' de Freeler Manager'),
                         ],
                       ),

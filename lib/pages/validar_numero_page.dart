@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:ecommerce/pages/registro_page.dart';
 class ValidarNumeroPage extends StatefulWidget {
-  static String tag = 'login-page';
+  static String tag = 'validar-numero-page';
   @override
   _ValidarNumeroPageState createState() => _ValidarNumeroPageState();
 }
@@ -35,7 +35,7 @@ class _ValidarNumeroPageState extends State<ValidarNumeroPage> {
           minWidth: 200.0,
           height: 42.0,
           onPressed: () {
-            //Navigator.of(context).pushNamed(ValidarNumeroPage.tag);
+            Navigator.of(context).pushNamed(RegistroPage.tag);
           },
           color: Colors.purple,
           child: Text('Enviar Código', style: TextStyle(color: Colors.white)),
@@ -45,6 +45,9 @@ class _ValidarNumeroPageState extends State<ValidarNumeroPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Confirma tu identidad'),        
+      ),
       body: Center(
         child: ListView(
           shrinkWrap: true,

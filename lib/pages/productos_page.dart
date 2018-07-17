@@ -58,7 +58,9 @@ class _ProductosPageState extends State<ProductosPage>
           elevation: 4.0,
           child: new Icon(Icons.add),
           backgroundColor: Colors.purple[700],
-          onPressed: () {});
+          onPressed: () {
+            
+          });
     else
       return null;
   }
@@ -177,6 +179,14 @@ class _ProductosPageState extends State<ProductosPage>
         appBar: AppBar(
           bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
           title: Text('Productos'),
+        ),
+        drawer: Drawer(
+          child: DrawerHeader(
+            child: Container(
+              child: Icon(Icons.account_circle),
+            ),
+          ),
+          semanticLabel: 'Menu',
         ),
         body: new TabBarView(
             controller: _tabController, children: lista.getElementos()),

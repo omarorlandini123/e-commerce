@@ -58,9 +58,7 @@ class _ProductosPageState extends State<ProductosPage>
           elevation: 4.0,
           child: new Icon(Icons.add),
           backgroundColor: Colors.purple[700],
-          onPressed: () {
-            
-          });
+          onPressed: () {});
     else
       return null;
   }
@@ -181,10 +179,31 @@ class _ProductosPageState extends State<ProductosPage>
           title: Text('Productos'),
         ),
         drawer: Drawer(
-          child: DrawerHeader(
-            child: Container(
-              child: Icon(Icons.account_circle),
-            ),
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+              ),
+              ListTile(
+                title: Text('Item 1'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                },
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                },
+              ),
+            ],
           ),
           semanticLabel: 'Menu',
         ),

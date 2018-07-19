@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/entidades/ListaMenu.dart';
+import 'package:ecommerce/entidades/OpcionMenu.dart';
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 const String _kAsset1 = 'assets/imgs/logo.png';
@@ -61,6 +63,8 @@ class _ProductosPageState extends State<ProductosPage>
     'E',
   ];
 
+  List<OpcionMenu> lstMenu;
+
   List<Widget> tarjetasLista(String image, String nombre, String costo) {
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
@@ -89,27 +93,28 @@ class _ProductosPageState extends State<ProductosPage>
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(
-                top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
+                top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
             child: CircleAvatar(
-              radius: 40.0,
+              radius: 35.0,
               backgroundImage: new AssetImage(image),
             ),
           ),
           Expanded(
             child: Container(
-                margin: EdgeInsets.only(top: 15.0),
+                margin: EdgeInsets.only(top: 10.0,left:5.0 ),
                 alignment: Alignment.centerLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Expanded(
                         child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Material(
                             child: Text(
                           nombre,
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(fontSize: 16.0),
                         )),
                         SizedBox(
                           height: 10.0,
@@ -117,7 +122,7 @@ class _ProductosPageState extends State<ProductosPage>
                         Material(
                             child: Text(
                           costo,
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(fontSize: 16.0),
                         ))
                       ],
                     )),
@@ -142,6 +147,17 @@ class _ProductosPageState extends State<ProductosPage>
   @override
   void initState() {
     super.initState();
+
+    lstMenu = new List<OpcionMenu>();
+
+    lstMenu.add(OpcionMenu(Icon(Icons.storage), 'Productos', () {
+      print("Opción productos seleccionada");
+    }));
+
+    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Pedidos', () {
+      print("Opción pedidos seleccionada");
+    }));
+
     tabController = new TabController(length: 3, vsync: this);
     _controller = new AnimationController(
       vsync: this,
@@ -211,151 +227,126 @@ class _ProductosPageState extends State<ProductosPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
-          title: Text('Productos'),
-        ),
-        drawer: new Drawer(
-          child: new Column(
-            children: <Widget>[
-              new UserAccountsDrawerHeader(
-                accountName: const Text('Juan Perez'),
-                accountEmail: const Text('juan.perez@example.com'),
-                currentAccountPicture: const CircleAvatar(
-                  backgroundImage: AssetImage(_kAsset0),
-                ),
-                otherAccountsPictures: <Widget>[
-                  new GestureDetector(
-                    onTap: () {
-                      _onOtherAccountsTap(context);
-                    },
-                    child: new Semantics(
-                      label: 'Switch to Account B',
-                      child: const CircleAvatar(
-                        backgroundImage: const AssetImage(_kAsset1),
-                      ),
-                    ),
-                  ),
-                  new GestureDetector(
-                    onTap: () {
-                      _onOtherAccountsTap(context);
-                    },
-                    child: new Semantics(
-                      label: 'Switch to Account C',
-                      child: const CircleAvatar(
-                        backgroundImage: const AssetImage(_kAsset2),
-                      ),
-                    ),
-                  ),
-                  new GestureDetector(
-                    onTap: () {
-                      _onOtherAccountsTap(context);
-                    },
-                    child: new Semantics(
-                      label: 'Switch to Account C',
-                      child: const CircleAvatar(
-                        backgroundImage: const AssetImage(_kAsset2),
-                      ),
-                    ),
-                  ),
-                ],
-                margin: EdgeInsets.zero,
-                onDetailsPressed: () {
-                  _showDrawerContents = !_showDrawerContents;
-                  if (_showDrawerContents)
-                    _controller.reverse();
-                  else
-                    _controller.forward();
-                },
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
+        title: Text('Productos'),
+      ),
+      drawer: new Drawer(
+        child: new Column(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: const Text('Juan Perez'),
+              accountEmail: const Text('juan.perez@example.com'),
+              currentAccountPicture: const CircleAvatar(
+                backgroundImage: AssetImage(_kAsset0),
               ),
-              new MediaQuery.removePadding(
-                context: context,
-                // DrawerHeader consumes top MediaQuery padding.
-                removeTop: true,
-                child: new Expanded(
-                  child: new ListView(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    children: <Widget>[
-                      new Stack(
-                        children: <Widget>[
-                          // The initial contents of the drawer.
-                          new FadeTransition(
-                            opacity: _drawerContentsOpacity,
+              otherAccountsPictures: <Widget>[
+                new GestureDetector(
+                  onTap: () {
+                    _onOtherAccountsTap(context);
+                  },
+                  child: new Semantics(
+                    label: 'Switch to Account B',
+                    child: const CircleAvatar(
+                      backgroundImage: const AssetImage(_kAsset1),
+                    ),
+                  ),
+                ),
+                new GestureDetector(
+                  onTap: () {
+                    _onOtherAccountsTap(context);
+                  },
+                  child: new Semantics(
+                    label: 'Switch to Account C',
+                    child: const CircleAvatar(
+                      backgroundImage: const AssetImage(_kAsset2),
+                    ),
+                  ),
+                ),
+                new GestureDetector(
+                  onTap: () {
+                    _onOtherAccountsTap(context);
+                  },
+                  child: new Semantics(
+                    label: 'Switch to Account C',
+                    child: const CircleAvatar(
+                      backgroundImage: const AssetImage(_kAsset2),
+                    ),
+                  ),
+                ),
+              ],
+              margin: EdgeInsets.zero,
+              onDetailsPressed: () {
+                _showDrawerContents = !_showDrawerContents;
+                if (_showDrawerContents)
+                  _controller.reverse();
+                else
+                  _controller.forward();
+              },
+            ),
+            new MediaQuery.removePadding(
+              context: context,
+              // DrawerHeader consumes top MediaQuery padding.
+              removeTop: true,
+              child: new Expanded(
+                child: new ListView(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  children: <Widget>[
+                    new Stack(
+                      children: <Widget>[
+                        // The initial contents of the drawer.
+                        new FadeTransition(
+                          opacity: _drawerContentsOpacity,
+                          child: new Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: lstMenu.map((OpcionMenu opcion) {
+                              return new ListTile(
+                                leading: new CircleAvatar(child: opcion.icono),
+                                title: new Text(opcion.etiqueta),
+                                onTap: opcion.onPressed,
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        // The drawer's "details" view.
+                        new SlideTransition(
+                          position: _drawerDetailsPosition,
+                          child: new FadeTransition(
+                            opacity:
+                                new ReverseAnimation(_drawerContentsOpacity),
                             child: new Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: _drawerContents.map((String id) {
-                                return new ListTile(
-                                  leading:
-                                      //new CircleAvatar(child: new Text(id)),
-                                      new CircleAvatar(child: Icon(Icons.touch_app)),
-                                  title: new Text('Drawer item $id'),
+                              children: <Widget>[
+                                new ListTile(
+                                  leading: const Icon(Icons.add),
+                                  title: const Text('Add account'),
                                   onTap: _showNotImplementedMessage,
-                                );
-                              }).toList(),
+                                ),
+                                new ListTile(
+                                  leading: const Icon(Icons.settings),
+                                  title: const Text('Manage accounts'),
+                                  onTap: _showNotImplementedMessage,
+                                ),
+                              ],
                             ),
                           ),
-                          // The drawer's "details" view.
-                          new SlideTransition(
-                            position: _drawerDetailsPosition,
-                            child: new FadeTransition(
-                              opacity:
-                                  new ReverseAnimation(_drawerContentsOpacity),
-                              child: new Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  new ListTile(
-                                    leading: const Icon(Icons.add),
-                                    title: const Text('Add account'),
-                                    onTap: _showNotImplementedMessage,
-                                  ),
-                                  new ListTile(
-                                    leading: const Icon(Icons.settings),
-                                    title: const Text('Manage accounts'),
-                                    onTap: _showNotImplementedMessage,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        body: new TabBarView(
-            controller: _tabController, children: lista.getElementos()),
-        floatingActionButton: getFloatButton(),
-        bottomNavigationBar: new Material(
-          color: Colors.purple[900],
-          child: new Container(
-              height: 60.0,
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  FlatButton.icon(
-                    textColor: Colors.white,
-                    icon: Icon(Icons.storage),
-                    label: Text('Productos'),
-                    onPressed: () {},
-                  ),
-                  FlatButton.icon(
-                    textColor: Colors.white,
-                    icon: Icon(Icons.receipt),
-                    label: Text('Pedidos'),
-                    onPressed: () {},
-                  )
-                ],
-              )),
-        ));
+      ),
+      body: new TabBarView(
+          controller: _tabController, children: lista.getElementos()),
+      floatingActionButton: getFloatButton(),
+    );
   }
 
   void _onOtherAccountsTap(BuildContext context) {

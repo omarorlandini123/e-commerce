@@ -1,8 +1,8 @@
 # ecommerce
 
-A new Flutter project.
+Proyecto piloto para gestión de ventas y seguimiento de entrega
 
-## Getting Started
+## Framework de Desarrollo "Flutter"
 
-For help getting started with Flutter, view our online
+Toda la documentación en inglés se encuentra en el siguiente Link
 [documentation](https://flutter.io/).

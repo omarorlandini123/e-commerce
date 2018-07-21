@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/pages/pedidos_page.dart';
+import 'package:ecommerce/pages/productos_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 
-const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
-class ProductosPage extends StatefulWidget {
-  static String tag = 'productos-page';
+const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
+class PedidosPage extends StatefulWidget {
+  static String tag ='pedidos-page';
   @override
-  _ProductosPageState createState() => _ProductosPageState();
+  _PedidosPageState createState() => _PedidosPageState();
 }
+
 
 class TabProductos {
   Tab tab;
@@ -41,8 +42,7 @@ class ListTabProductos {
     return elementos;
   }
 }
-
-class _ProductosPageState extends State<ProductosPage>
+class _PedidosPageState extends State<PedidosPage> 
     with TickerProviderStateMixin {
   ListTabProductos lista;
   TabController _tabController;
@@ -52,6 +52,7 @@ class _ProductosPageState extends State<ProductosPage>
   Animation<Offset> _drawerDetailsPosition;
   bool _showDrawerContents = true;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 
   List<OpcionMenu> lstMenu;
 
@@ -74,7 +75,7 @@ class _ProductosPageState extends State<ProductosPage>
       return null;
   }
 
- Card tarjeta(String image, String nombre, String costo) {
+    Card tarjeta(String image, String nombre, String costo) {
     return new Card(
       elevation: 3.0,
       child: Row(
@@ -91,7 +92,7 @@ class _ProductosPageState extends State<ProductosPage>
           ),
           Expanded(
             child: Container(
-                margin: EdgeInsets.only(top: 10.0,left:5.0 ),
+                margin: EdgeInsets.only(top: 10.0, left: 5.0),
                 alignment: Alignment.centerLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -113,17 +114,46 @@ class _ProductosPageState extends State<ProductosPage>
                             child: Text(
                           costo,
                           style: TextStyle(fontSize: 16.0),
-                        ))
+                        )),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Center(child:Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Material(
+                                child: Icon(                              
+                              Icons.directions_car,
+                              color: Colors.blueAccent,
+                              size: 20.0,
+                            )),
+                            Material(
+                                child: Icon(
+                              Icons.monetization_on,
+                               color: Colors.greenAccent,
+                              size: 20.0,
+                            )),
+                           
+                          ],
+                        ),),
+                        SizedBox(
+                          height: 10.0,
+                        ),
                       ],
                     )),
                     Container(
                         alignment: Alignment.centerRight,
                         margin: EdgeInsets.only(
                             top: 10.0, bottom: 10.0, right: 15.0),
-                        child: IconButton(
-                          icon: Icon(Icons.share),
-                          onPressed: () {},
-                          iconSize: 30.0,
+                        child: Column(
+                          children: <Widget>[
+                            IconButton(
+                              padding: EdgeInsets.all(3.0),
+                              icon: Icon(Icons.delete),
+                              onPressed: () {},
+                              iconSize: 30.0,
+                            ),
+                          ],
                         ))
                   ],
                 )),
@@ -134,6 +164,8 @@ class _ProductosPageState extends State<ProductosPage>
     );
   }
 
+
+ 
   @override
   void initState() {
     super.initState();
@@ -141,11 +173,11 @@ class _ProductosPageState extends State<ProductosPage>
     lstMenu = new List<OpcionMenu>();
 
     lstMenu.add(OpcionMenu(Icon(Icons.storage), 'Productos', () {
-      Navigator.of(context);
+      Navigator.of(context).popAndPushNamed(ProductosPage.tag);
     }));
 
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Pedidos', () {
-      Navigator.of(context).popAndPushNamed(PedidosPage.tag);
+      Navigator.of(context);
     }));
 
     tabController = new TabController(length: 3, vsync: this);
@@ -220,7 +252,7 @@ class _ProductosPageState extends State<ProductosPage>
       backgroundColor: Colors.white,
       appBar: AppBar(
         bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
-        title: Text('Productos'),
+        title: Text('Pedidos'),
       ),
       drawer: new Drawer(
         child: new Column(
@@ -231,6 +263,7 @@ class _ProductosPageState extends State<ProductosPage>
               currentAccountPicture: const CircleAvatar(
                 backgroundImage: AssetImage(_kAsset0),
               ),
+              
               margin: EdgeInsets.zero,
               onDetailsPressed: () {
                 _showDrawerContents = !_showDrawerContents;
@@ -303,4 +336,6 @@ class _ProductosPageState extends State<ProductosPage>
       floatingActionButton: getFloatButton(),
     );
   }
+
+  
 }

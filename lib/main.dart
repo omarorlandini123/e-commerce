@@ -3,6 +3,7 @@ import 'package:ecommerce/pages/login_page.dart';
 import 'package:ecommerce/pages/validar_numero_page.dart';
 import 'package:ecommerce/pages/registro_page.dart';
 import 'package:ecommerce/pages/productos_page.dart';
+import 'package:ecommerce/pages/pedidos_page.dart';
 
 void main() => runApp(new MyApp());
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     LoginPage.tag : (context)=>LoginPage(),
     ValidarNumeroPage.tag : (context)=>ValidarNumeroPage(),
     RegistroPage.tag: (context)=>RegistroPage(),
-    ProductosPage.tag : (context)=>ProductosPage()
+    ProductosPage.tag : (context)=>ProductosPage(),
+    PedidosPage.tag: (context)=>PedidosPage()
   };
 
   MyApp();

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/productos_page.dart';
+import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 
-
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
+
 class PedidosPage extends StatefulWidget {
-  static String tag ='pedidos-page';
+  static String tag = 'pedidos-page';
   @override
   _PedidosPageState createState() => _PedidosPageState();
 }
-
 
 class TabProductos {
   Tab tab;
@@ -42,7 +42,21 @@ class ListTabProductos {
     return elementos;
   }
 }
-class _PedidosPageState extends State<PedidosPage> 
+
+class Choice {
+  const Choice({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'Enviado', icon: Icons.directions_car),
+  const Choice(title: 'Pagado', icon: Icons.monetization_on),
+  const Choice(title: 'Eliminar', icon: Icons.delete)
+];
+
+class _PedidosPageState extends State<PedidosPage>
     with TickerProviderStateMixin {
   ListTabProductos lista;
   TabController _tabController;
@@ -53,6 +67,14 @@ class _PedidosPageState extends State<PedidosPage>
   bool _showDrawerContents = true;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
+  Choice _selectedChoice = choices[0]; // The app's "state".
+
+  void _select(Choice choice) {
+    // Causes the app to rebuild with the new _selectedChoice.
+    setState(() {
+      _selectedChoice = choice;
+    });
+  }
 
   List<OpcionMenu> lstMenu;
 
@@ -60,6 +82,14 @@ class _PedidosPageState extends State<PedidosPage>
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
       lista.add(tarjeta(image, nombre, costo));
+    }
+    return lista;
+  }
+
+  List<Widget> tarjetasTerceros(String image, String nombre, String costo) {
+    List<Widget> lista = new List<Widget>();
+    for (var i = 0; i < 15; i++) {
+      lista.add(tarjetaTercero(image, nombre, costo));
     }
     return lista;
   }
@@ -75,7 +105,7 @@ class _PedidosPageState extends State<PedidosPage>
       return null;
   }
 
-    Card tarjeta(String image, String nombre, String costo) {
+  Card tarjeta(String image, String nombre, String costo) {
     return new Card(
       elevation: 3.0,
       child: Row(
@@ -118,24 +148,25 @@ class _PedidosPageState extends State<PedidosPage>
                         SizedBox(
                           height: 10.0,
                         ),
-                        Center(child:Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Material(
-                                child: Icon(                              
-                              Icons.directions_car,
-                              color: Colors.blueAccent,
-                              size: 20.0,
-                            )),
-                            Material(
-                                child: Icon(
-                              Icons.monetization_on,
-                               color: Colors.greenAccent,
-                              size: 20.0,
-                            )),
-                           
-                          ],
-                        ),),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Material(
+                                  child: Icon(
+                                Icons.directions_car,
+                                color: Colors.blueAccent,
+                                size: 20.0,
+                              )),
+                              Material(
+                                  child: Icon(
+                                Icons.monetization_on,
+                                color: Colors.greenAccent,
+                                size: 20.0,
+                              )),
+                            ],
+                          ),
+                        ),
                         SizedBox(
                           height: 10.0,
                         ),
@@ -147,11 +178,20 @@ class _PedidosPageState extends State<PedidosPage>
                             top: 10.0, bottom: 10.0, right: 15.0),
                         child: Column(
                           children: <Widget>[
-                            IconButton(
-                              padding: EdgeInsets.all(3.0),
-                              icon: Icon(Icons.delete),
-                              onPressed: () {},
-                              iconSize: 30.0,
+                            PopupMenuButton<Choice>(
+                              onSelected: _select,
+                              itemBuilder: (BuildContext context) {
+                                return choices.map((Choice choice) {
+                                  return PopupMenuItem<Choice>(
+                                      value: choice,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(choice.icon), 
+                                          Text(choice.title),
+                                        ],
+                                      ));
+                                }).toList();
+                              },
                             ),
                           ],
                         ))
@@ -164,8 +204,82 @@ class _PedidosPageState extends State<PedidosPage>
     );
   }
 
+  Card tarjetaTercero(String image, String nombre, String costo) {
+    return new Card(
+      elevation: 3.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(
+                top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+            child: CircleAvatar(
+              radius: 35.0,
+              backgroundImage: new AssetImage(image),
+            ),
+          ),
+          Expanded(
+            child: Container(
+                margin: EdgeInsets.only(top: 10.0, left: 5.0),
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Material(
+                            child: Text(
+                          nombre,
+                          style: TextStyle(fontSize: 16.0),
+                        )),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Material(
+                            child: Text(
+                          costo,
+                          style: TextStyle(fontSize: 16.0),
+                        )),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Material(
+                                  child: Icon(
+                                Icons.directions_car,
+                                color: Colors.blueAccent,
+                                size: 20.0,
+                              )),
+                              Material(
+                                  child: Icon(
+                                Icons.monetization_on,
+                                color: Colors.greenAccent,
+                                size: 20.0,
+                              )),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                      ],
+                    )),
+                  ],
+                )),
+          )
+        ],
+      ),
+      margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom: 10.0),
+    );
+  }
 
- 
   @override
   void initState() {
     super.initState();
@@ -178,6 +292,10 @@ class _PedidosPageState extends State<PedidosPage>
 
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Pedidos', () {
       Navigator.of(context);
+    }));
+    
+    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mis Empresas', () {
+      Navigator.of(context).popAndPushNamed(MisEmpresasPage.tag);
     }));
 
     tabController = new TabController(length: 3, vsync: this);
@@ -213,7 +331,7 @@ class _PedidosPageState extends State<PedidosPage>
         new Tab(text: 'Terceros'),
         new Container(
           child: ListView(
-            children: tarjetasLista('assets/imgs/pollito.jpeg',
+            children: tarjetasTerceros('assets/imgs/pollito.jpeg',
                 "Pollito a la Brasa", "Costo: S/24.00"),
           ),
         ));
@@ -263,7 +381,6 @@ class _PedidosPageState extends State<PedidosPage>
               currentAccountPicture: const CircleAvatar(
                 backgroundImage: AssetImage(_kAsset0),
               ),
-              
               margin: EdgeInsets.zero,
               onDetailsPressed: () {
                 _showDrawerContents = !_showDrawerContents;
@@ -333,9 +450,6 @@ class _PedidosPageState extends State<PedidosPage>
       ),
       body: new TabBarView(
           controller: _tabController, children: lista.getElementos()),
-      floatingActionButton: getFloatButton(),
     );
   }
-
-  
 }

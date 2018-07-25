@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'productos_page.dart';
-//import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
@@ -24,8 +24,9 @@ class _RegistroPageState extends State<RegistroPage> {
   final double espaciado=8.0;
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
-  final myController = TextEditingController();
   String _currentCity;
+  final myController = TextEditingController();
+  
   String barcode = "";
 
   @override
@@ -185,7 +186,7 @@ final txtEmail = TextFormField(
         actions: <Widget>[
           FlatButton(
               textColor: Colors.white, 
-              child: Text("SIG."), //onPressed: scan
+              child: Text("SIG."), 
               onPressed: () {
                 Navigator.of(context).pushNamed(ProductosPage.tag);
               },
@@ -238,36 +239,36 @@ final txtEmail = TextFormField(
           SizedBox(
             height: espaciado,
           ),
-          txtCodigoRef,
+          txtEmail,
           SizedBox(
             height: espaciado,
           ),
-          txtEmail,
+          txtCodigoRef,          
         ],
       ),
     );
   }
 
   Future scan() async {
-    // try {
-    //   String barcode = await BarcodeScanner.scan();
-    //   setState(() {
-    //     this.barcode = barcode;
-    //     myController.text = barcode;
-    //   });
-    // } on PlatformException catch (e) {
-    //   if (e.code == BarcodeScanner.CameraAccessDenied) {
-    //     setState(() {
-    //       this.barcode = 'The user did not grant the camera permission!';
-    //     });
-    //   } else {
-    //     setState(() => this.barcode = 'Unknown error: $e');
-    //   }
-    // } on FormatException {
-    //   setState(() => this.barcode =
-    //       'null (User returned using the "back"-button before scanning anything. Result)');
-    // } catch (e) {
-    //   setState(() => this.barcode = 'Unknown error: $e');
-    // }
+    try {
+      String barcode = await BarcodeScanner.scan();
+      setState(() {
+        this.barcode = barcode;
+        myController.text = barcode;
+      });
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          this.barcode = 'La aplicación no tiene permiso para acceder a la cámara';
+        });
+      } else {
+        setState(() => this.barcode = 'Error desconocido: $e');
+      }
+    } on FormatException {
+      setState(() => this.barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this.barcode = 'Unknown error: $e');
+    }
   }
 }

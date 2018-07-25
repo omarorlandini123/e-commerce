@@ -2,51 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/pedidos_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
-import 'package:ecommerce/pages/mis_empresas_page.dart';
+import 'package:ecommerce/pages/productos_page.dart';
+
+class MisEmpresasPage extends StatefulWidget {
+  static String tag = 'mis-empresas-page';
+  @override
+  _MisEmpresasPageState createState() => _MisEmpresasPageState();
+}
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
-class ProductosPage extends StatefulWidget {
-  static String tag = 'productos-page';
-  @override
-  _ProductosPageState createState() => _ProductosPageState();
-}
-
-class TabProductos {
-  Tab tab;
-  Widget elemento;
-  TabProductos(this.tab, this.elemento);
-}
-
-class ListTabProductos {
-  List<TabProductos> productos;
-  List<Tab> tabs;
-  List<Widget> elementos;
-
-  ListTabProductos() {
-    productos = new List<TabProductos>();
-    tabs = new List<Tab>();
-    elementos = new List<Widget>();
-  }
-
-  void addProducto(Tab tab, Widget elemento) {
-    productos.add(new TabProductos(tab, elemento));
-    tabs.add(tab);
-    elementos.add(elemento);
-  }
-
-  List<Tab> getTabs() {
-    return tabs;
-  }
-
-  List<Widget> getElementos() {
-    return elementos;
-  }
-}
-
-class _ProductosPageState extends State<ProductosPage>
+class _MisEmpresasPageState extends State<MisEmpresasPage>
     with TickerProviderStateMixin {
-  ListTabProductos lista;
   TabController _tabController;
   bool mostrarBoton = true;
   AnimationController _controller;
@@ -78,7 +45,7 @@ class _ProductosPageState extends State<ProductosPage>
       return null;
   }
 
- Card tarjeta(String image, String nombre, String costo) {
+  Card tarjeta(String image, String nombre, String costo) {
     return new Card(
       elevation: 3.0,
       child: Row(
@@ -95,7 +62,7 @@ class _ProductosPageState extends State<ProductosPage>
           ),
           Expanded(
             child: Container(
-                margin: EdgeInsets.only(top: 10.0,left:5.0 ),
+                margin: EdgeInsets.only(top: 10.0, left: 5.0),
                 alignment: Alignment.centerLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -145,7 +112,7 @@ class _ProductosPageState extends State<ProductosPage>
     lstMenu = new List<OpcionMenu>();
 
     lstMenu.add(OpcionMenu(Icon(Icons.storage), 'Productos', () {
-      Navigator.of(context);
+      Navigator.of(context).popAndPushNamed(ProductosPage.tag);
     }));
 
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Pedidos', () {
@@ -153,7 +120,7 @@ class _ProductosPageState extends State<ProductosPage>
     }));
 
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mis Empresas', () {
-      Navigator.of(context).popAndPushNamed(MisEmpresasPage.tag);
+      Navigator.of(context);
     }));
 
     tabController = new TabController(length: 3, vsync: this);
@@ -173,38 +140,7 @@ class _ProductosPageState extends State<ProductosPage>
       parent: _controller,
       curve: Curves.fastOutSlowIn,
     ));
-    lista = new ListTabProductos();
-    lista.addProducto(
-      new Tab(
-        text: 'Propios',
-      ),
-      new Container(
-        child: ListView(
-          children: tarjetasLista(
-              'assets/imgs/hamburguesa.jpg', "Hamburguesa", "Costo: S/10.00"),
-        ),
-      ),
-    );
-    lista.addProducto(
-        new Tab(text: 'Terceros'),
-        new Container(
-          child: ListView(
-            children: tarjetasLista('assets/imgs/pollito.jpeg',
-                "Pollito a la Brasa", "Costo: S/24.00"),
-          ),
-        ));
-
-    _tabController =
-        new TabController(vsync: this, length: lista.getTabs().length);
-    _tabController.addListener(() {
-      this.setState(() {
-        if (_tabController.index == 1) {
-          mostrarBoton = false;
-        } else {
-          mostrarBoton = true;
-        }
-      });
-    });
+    _searchOn = false;
   }
 
   @override
@@ -222,14 +158,46 @@ class _ProductosPageState extends State<ProductosPage>
 
   TabController tabController;
 
+  bool _searchOn = false;
+  AppBar getAppBar() {
+    if (_searchOn) {
+      return new AppBar(
+        title: 
+            TextField(
+              onChanged: (texto){
+                  
+              },  
+              decoration: InputDecoration(
+                 fillColor:Colors.white,
+                 filled: true,
+                hintText: 'Buscar',
+                suffixIcon: Icon(Icons.search)
+              ),
+            )
+          
+      );
+    } else {
+      return new AppBar(
+        title: Text('Mis Empresas'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                onPressed: (){
+                  setState(() {
+                _searchOn = true;
+              });
+                },
+              )
+            ],
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
-        title: Text('Productos'),
-      ),
+      appBar: getAppBar(),
       drawer: new Drawer(
         child: new Column(
           children: <Widget>[
@@ -306,8 +274,17 @@ class _ProductosPageState extends State<ProductosPage>
           ],
         ),
       ),
-      body: new TabBarView(
-          controller: _tabController, children: lista.getElementos()),
+      body: Container(
+        child: ListView(children: <Widget>[
+          new ListTile(
+              leading: const Icon(Icons.business),
+              title: const Text('El gran sandwich'),
+              //subtitle: const Text(''),
+              enabled: true,
+              onLongPress: () {},
+              onTap: () {/* react to the tile being tapped */})
+        ]),
+      ),
       floatingActionButton: getFloatButton(),
     );
   }

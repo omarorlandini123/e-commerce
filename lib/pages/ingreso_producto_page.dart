@@ -176,7 +176,7 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Mis Empresas'),
+          title: Text('Nuevo Producto'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.save, color: Colors.white,),

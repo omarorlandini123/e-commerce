@@ -3,6 +3,7 @@ import 'package:ecommerce/pages/pedidos_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
+import 'package:ecommerce/pages/detalle_producto_page.dart';
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
@@ -78,24 +79,33 @@ class _ProductosPageState extends State<ProductosPage>
       return null;
   }
 
- Card tarjeta(String image, String nombre, String costo) {
+  Card tarjeta(String image, String nombre, String costo) {
     return new Card(
       elevation: 3.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(
-                top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-            child: CircleAvatar(
-              radius: 35.0,
-              backgroundImage: new AssetImage(image),
+          
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetalleProductoPage(image)),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+              child: CircleAvatar(
+                radius: 35.0,
+                backgroundImage: new AssetImage(image),
+              ),
             ),
           ),
           Expanded(
             child: Container(
-                margin: EdgeInsets.only(top: 10.0,left:5.0 ),
+                margin: EdgeInsets.only(top: 10.0, left: 5.0),
                 alignment: Alignment.centerLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,

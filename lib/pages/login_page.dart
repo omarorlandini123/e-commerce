@@ -20,11 +20,8 @@ class _LoginPageState extends State<LoginPage> {
                  image: new AssetImage('assets/imgs/logo2.png'),
                  fit: BoxFit.cover,
                ),
-               borderRadius: new BorderRadius.all(new Radius.circular(75.0)),
-               border: new Border.all(
-                 color: Colors.grey,
-                 width: 1.0,
-               ),
+               //borderRadius: new BorderRadius.all(new Radius.circular(75.0)),
+              
              ),
            );
 

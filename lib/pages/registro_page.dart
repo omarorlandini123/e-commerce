@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'productos_page.dart';
-//import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class RegistroPage extends StatefulWidget {
   static String tag = 'registro-page';
@@ -11,7 +13,6 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _RegistroPageState extends State<RegistroPage> {
-  
   List _cities = [
     "Cluj-Napoca",
     "Bucuresti",
@@ -20,13 +21,13 @@ class _RegistroPageState extends State<RegistroPage> {
     "Constanta"
   ];
 
-  final double tamanoTexto=16.0;
-  final double espaciado=8.0;
+  final double tamanoTexto = 16.0;
+  final double espaciado = 8.0;
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
   String _currentCity;
   final myController = TextEditingController();
-  
+
   String barcode = "";
 
   @override
@@ -55,8 +56,8 @@ class _RegistroPageState extends State<RegistroPage> {
     final txtDNI = TextFormField(
       controller: myController,
       enabled: false,
-      style:
-          TextStyle(fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+      style: TextStyle(
+          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.number,
       autofocus: false,
       decoration: InputDecoration(
@@ -66,8 +67,8 @@ class _RegistroPageState extends State<RegistroPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
     );
     final txtNombre = TextFormField(
-      style:
-          TextStyle(fontSize:tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+      style: TextStyle(
+          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
@@ -76,9 +77,9 @@ class _RegistroPageState extends State<RegistroPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
     );
-final txtEmail = TextFormField(
-      style:
-          TextStyle(fontSize:tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+    final txtEmail = TextFormField(
+      style: TextStyle(
+          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
@@ -88,8 +89,8 @@ final txtEmail = TextFormField(
               OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
     );
     final txtCodigoRef = TextFormField(
-      style:
-          TextStyle(fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+      style: TextStyle(
+          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
@@ -100,8 +101,8 @@ final txtEmail = TextFormField(
     );
 
     final txtApellidoPaterno = TextFormField(
-      style:
-          TextStyle(fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+      style: TextStyle(
+          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
@@ -112,8 +113,8 @@ final txtEmail = TextFormField(
     );
 
     final txtApellidoMaterno = TextFormField(
-      style:
-          TextStyle(fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+      style: TextStyle(
+          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
@@ -123,23 +124,24 @@ final txtEmail = TextFormField(
               OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
     );
 
-
     final cbDepartamento = Container(
-       
         padding: EdgeInsets.fromLTRB(20.0, 10.0, 25.0, 10.0),
         decoration: BoxDecoration(
             border: Border.all(
                 color: Colors.grey, width: 1.0, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(10.0)),
-        child: Row(children: <Widget>[          
-          Expanded(child:DropdownButton(
-            style: TextStyle(              
-                fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+        child: Row(children: <Widget>[
+          Expanded(
+              child: DropdownButton(
+            style: TextStyle(
+                fontSize: tamanoTexto,
+                color: Colors.black,
+                fontFamily: "Arial"),
             isDense: true,
             value: _currentCity,
             items: _dropDownMenuItems,
             onChanged: changedDropDownItem,
-            elevation: 3,            
+            elevation: 3,
           ))
         ]));
     final cbLocalidad = Container(
@@ -149,16 +151,19 @@ final txtEmail = TextFormField(
                 color: Colors.grey, width: 1.0, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(10.0)),
         child: Row(children: <Widget>[
-          Expanded(child: 
-          DropdownButton(
-            style: TextStyle(
-                fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
-            isDense: true,
-            value: _currentCity,
-            items: _dropDownMenuItems,
-            onChanged: changedDropDownItem,
-            elevation: 3,
-          ),)
+          Expanded(
+            child: DropdownButton(
+              style: TextStyle(
+                  fontSize: tamanoTexto,
+                  color: Colors.black,
+                  fontFamily: "Arial"),
+              isDense: true,
+              value: _currentCity,
+              items: _dropDownMenuItems,
+              onChanged: changedDropDownItem,
+              elevation: 3,
+            ),
+          )
         ]));
     final cbProvincia = Container(
         padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -167,10 +172,12 @@ final txtEmail = TextFormField(
                 color: Colors.grey, width: 1.0, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(10.0)),
         child: Row(children: <Widget>[
-          Expanded(child: 
-          DropdownButton(
+          Expanded(
+              child: DropdownButton(
             style: TextStyle(
-                fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+                fontSize: tamanoTexto,
+                color: Colors.black,
+                fontFamily: "Arial"),
             isDense: true,
             value: _currentCity,
             items: _dropDownMenuItems,
@@ -185,12 +192,12 @@ final txtEmail = TextFormField(
         title: Text('Ingresa tus Datos'),
         actions: <Widget>[
           FlatButton(
-              textColor: Colors.white, 
-              child: Text("SIG."), 
-              onPressed: () {
-                Navigator.of(context).pushNamed(ProductosPage.tag);
-              },
-              ),
+            textColor: Colors.white,
+            child: Text("SIG."),
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProductosPage.tag);
+            },
+          ),
         ],
       ),
       body: ListView(
@@ -204,12 +211,62 @@ final txtEmail = TextFormField(
               Container(
                   margin: EdgeInsets.only(left: 24.0),
                   child: RaisedButton(
-                    color: Colors.purple,
-                    textColor: Colors.white,
-                    elevation: 2.0,
-                    child: Text("Escanear"), 
-                    onPressed: scan
-                    ))
+                      color: Colors.purple,
+                      textColor: Colors.white,
+                      elevation: 2.0,
+                      child: Text("Escanear"),
+                      onPressed: scan))
+            ],
+          ),
+          SizedBox(
+            height: espaciado,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 5.0),
+            child: Text("Tómale foto a tu D.N.I.",
+                style: TextStyle(
+                    fontSize: tamanoTexto,
+                    color: Colors.black,
+                    fontFamily: "Arial")),
+          ),
+          SizedBox(
+            height: espaciado,
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: fotoFrontal==null? new Text("Toma una foto"):Image.file(fotoFrontal))),
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Image.asset("assets/imgs/pollito.jpeg")))
+            ],
+          ),
+          SizedBox(
+            height: espaciado,
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: RaisedButton(
+                          color: Colors.purple,
+                          textColor: Colors.white,
+                          elevation: 2.0,
+                          child: Text("Frontal"),
+                          onPressed: tomarFoto))),
+              Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: RaisedButton(
+                          color: Colors.purple,
+                          textColor: Colors.white,
+                          elevation: 2.0,
+                          child: Text("Reverso"),
+                          onPressed: scan)))
             ],
           ),
           SizedBox(
@@ -243,32 +300,44 @@ final txtEmail = TextFormField(
           SizedBox(
             height: espaciado,
           ),
-          txtCodigoRef,          
+          txtCodigoRef,
         ],
       ),
     );
   }
 
+  File fotoFrontal;
+
+  Future tomarFoto() async {
+    try {
+      File img = await ImagePicker.pickImage(source: ImageSource.camera);
+      setState(() {
+        fotoFrontal = img;
+      });
+    } catch (e) {}
+  }
+
   Future scan() async {
-    // try {
-    //   String barcode = await BarcodeScanner.scan();
-    //   setState(() {
-    //     this.barcode = barcode;
-    //     myController.text = barcode;
-    //   });
-    // } on PlatformException catch (e) {
-    //   if (e.code == BarcodeScanner.CameraAccessDenied) {
-    //     setState(() {
-    //       this.barcode = 'La aplicación no tiene permiso para acceder a la cámara';
-    //     });
-    //   } else {
-    //     setState(() => this.barcode = 'Error desconocido: $e');
-    //   }
-    // } on FormatException {
-    //   setState(() => this.barcode =
-    //       'null (User returned using the "back"-button before scanning anything. Result)');
-    // } catch (e) {
-    //   setState(() => this.barcode = 'Unknown error: $e');
-    // }
+    try {
+      String barcode = await BarcodeScanner.scan();
+      setState(() {
+        this.barcode = barcode;
+        myController.text = barcode;
+      });
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          this.barcode =
+              'La aplicación no tiene permiso para acceder a la cámara';
+        });
+      } else {
+        setState(() => this.barcode = 'Error desconocido: $e');
+      }
+    } on FormatException {
+      setState(() => this.barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this.barcode = 'Unknown error: $e');
+    }
   }
 }

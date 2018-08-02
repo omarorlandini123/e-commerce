@@ -11,8 +11,8 @@ class DetalleProductoPage extends StatefulWidget {
       _DetalleProductoPageState(this.imageURL);
 }
 
-   final double tamanoTexto=16.0;
-  final double espaciado=8.0;
+final double tamanoTexto = 16.0;
+final double espaciado = 8.0;
 
 class _DetalleProductoPageState extends State<DetalleProductoPage> {
   String imageURL;
@@ -48,39 +48,54 @@ class _DetalleProductoPageState extends State<DetalleProductoPage> {
     super.initState();
   }
 
-
   final txtDetalleProducto = TextFormField(
-      style:
-          TextStyle(fontSize:tamanoTexto, color: Colors.black, fontFamily: "Arial"),
-      keyboardType: TextInputType.text,
-      autofocus: false,
-      decoration: InputDecoration(
-          labelText: "Detalle de Producto",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
-    );
+    style: TextStyle(
+        fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+    keyboardType: TextInputType.text,
+    autofocus: false,
+    decoration: InputDecoration(
+        labelText: "Detalle de Producto",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
+  );
 
   final txtPrecio = TextFormField(
-      style:
-          TextStyle(fontSize:tamanoTexto, color: Colors.black, fontFamily: "Arial"),
-      keyboardType: TextInputType.text,
-      autofocus: false,
-      decoration: InputDecoration(
-          labelText: "Precio",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
-    );
+    style: TextStyle(
+        fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
+    keyboardType: TextInputType.text,
+    autofocus: false,
+    decoration: InputDecoration(
+        labelText: "Precio",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("Hamburguesa"),
+        backgroundColor: Colors.white,
+        textTheme: TextTheme(
+            title: TextStyle(
+              fontSize: 18.0,
+          color: Colors.black,
+        )),
+        iconTheme: IconThemeData(color: Colors.black),
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () {},
+          )
+        ],
+        title: Text("El producto"),
       ),
       body: ListView(
-        padding: EdgeInsets.only(right: 25.0, left :25.0),
         scrollDirection: Axis.vertical,
         children: <Widget>[
           Container(
@@ -92,7 +107,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage> {
             decoration: new BoxDecoration(
               image: new DecorationImage(
                 colorFilter: new ColorFilter.mode(
-                    Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                    Colors.black.withOpacity(1.0), BlendMode.dstATop),
                 image: new AssetImage(imageURL),
                 fit: BoxFit.cover,
               ),
@@ -106,28 +121,35 @@ class _DetalleProductoPageState extends State<DetalleProductoPage> {
           SizedBox(
             height: 25.0,
           ),
-          txtDetalleProducto,
-          SizedBox(
-            height: 25.0,
-          ),
-          txtPrecio,
-          SizedBox(
-            height: 25.0,
-          ),
-          Row(
-            mainAxisAlignment:  MainAxisAlignment.center,
-            children: <Widget>[
-              etiqueta('${_date.toString()}'.substring(0,10)),
-              SizedBox(
-                width: 25.0,
-              ),
-              RaisedButton(
-                child: new Text('Fecha de vencimiento'),
-                onPressed: () {
-                  _selectDate(context);
-                },
-              ),
-            ],
+          Padding(
+            padding: EdgeInsets.only(right: 25.0, left: 25.0),
+            child: Column(
+              children: <Widget>[
+                txtDetalleProducto,
+                SizedBox(
+                  height: 25.0,
+                ),
+                txtPrecio,
+                SizedBox(
+                  height: 25.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    etiqueta('${_date.toString()}'.substring(0, 10)),
+                    SizedBox(
+                      width: 25.0,
+                    ),
+                    RaisedButton(
+                      child: new Text('Fecha de vencimiento'),
+                      onPressed: () {
+                        _selectDate(context);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

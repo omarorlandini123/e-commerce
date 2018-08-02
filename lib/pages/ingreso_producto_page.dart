@@ -188,7 +188,7 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
               EdgeInsets.only(top: 24.0, bottom: 24.0, left: 24.0, right: 24.0),
           children: <Widget>[
             Row(children: <Widget>[
-              cbEmpresa,
+              Expanded(child:cbEmpresa),
               IconButton(
                 icon: Icon(Icons.image),
                 onPressed: () {},
@@ -198,13 +198,13 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
             SizedBox(
                 height: espaciado,
               ),
-              cbTipo
+              
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
             backgroundColor: Colors.purple,
             icon: Icon(Icons.add),
-            label: Text('Añadir Empresa'),
+            label: Text('Añadir Producto'),
             onPressed: () {}));
   }
 }

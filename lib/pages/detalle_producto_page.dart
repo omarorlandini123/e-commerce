@@ -20,7 +20,13 @@ class _DetalleProductoPageState extends State<DetalleProductoPage> {
   String imageURL;
   final myController = TextEditingController();
 
-  _DetalleProductoPageState(this.imageURL);
+  _DetalleProductoPageState(String imageURL){
+    if(imageURL!=null && !imageURL.isEmpty ) {
+      this.imageURL = imageURL;
+    }else{
+      this.imageURL="assets/imgs/hamburguesa.jpg";
+    }
+  }
   Text etiqueta(String text) {
     return Text(
       text,

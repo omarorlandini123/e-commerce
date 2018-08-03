@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:ecommerce/pages/detalle_producto_page.dart';
 
 class IngresoProductoPage extends StatefulWidget {
   static String tag = 'ingreso-producto-page';
@@ -64,7 +64,7 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
     return items;
   }
 
-   Card tarjeta(String image, String nombre, String costo) {
+  Card tarjeta(String image, String nombre, String costo) {
     return new Card(
       elevation: 3.0,
       child: Row(
@@ -81,7 +81,7 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
           ),
           Expanded(
             child: Container(
-                margin: EdgeInsets.only(top: 10.0,left:5.0 ),
+                margin: EdgeInsets.only(top: 10.0, left: 5.0),
                 alignment: Alignment.centerLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -123,7 +123,6 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
       margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom: 10.0),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -168,43 +167,167 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
           ))
         ]));
 
-
-        
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text('Nuevo Producto'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.save, color: Colors.white,),
-              onPressed: (){},
-            )
-           
+
+        body: new CustomScrollView(
+
+          slivers: <Widget>[
+
+             SliverAppBar(
+
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    Icons.photo_camera,
+                    color: Colors.white,
+                  ),
+                  onPressed: (){
+
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.save,
+                    color: Colors.white,
+                  ),
+                  onPressed: (){
+
+                  },
+                ),
+
+              ],
+              pinned: true,
+              elevation: 4.0,
+              expandedHeight: 250.0,
+              //31334300
+
+              flexibleSpace:  FlexibleSpaceBar(
+
+                background: Image.asset("assets/imgs/hamburguesa.jpg",
+                  fit: BoxFit.cover ,
+                  color: Color.fromRGBO(23,34, 45, 0.2),
+                  colorBlendMode: BlendMode.darken,),
+                title: Text('Nuevo Producto')),
+
+            ),
+             new SliverFixedExtentList(
+                itemExtent: 220.0,
+
+              delegate: new SliverChildBuilderDelegate(
+
+                    (BuildContext context, int index) {
+
+                  return  new ListView(
+                       shrinkWrap: true,
+                         padding:
+                             EdgeInsets.only(top: 24.0, bottom: 24.0, left: 24.0, right: 24.0),
+                         children: <Widget>[
+                           Row(children: <Widget>[
+                             Expanded(child:cbEmpresa),
+
+
+                           ]),
+                           SizedBox(
+                               height: espaciado,
+                             ),
+                         ],
+                       );
+                },childCount: 1,
+              ),
+
+            ),
+            new SliverFixedExtentList(
+              itemExtent: 50.0,
+              delegate: new SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return new Container(
+                    alignment: Alignment.center,
+                    color: Colors.lightBlue[100 * (index % 9)],
+                    child: new Text('list item $index'),
+                  );
+                },childCount: 3,
+              ),
+            ),
+
           ],
         ),
-        body: new ListView(
-          shrinkWrap: true,
-          padding:
-              EdgeInsets.only(top: 24.0, bottom: 24.0, left: 24.0, right: 24.0),
-          children: <Widget>[
-            Row(children: <Widget>[
-              Expanded(child:cbEmpresa),
-              IconButton(
-                icon: Icon(Icons.image),
-                onPressed: () {},
-              ),
-              
-            ]),
-            SizedBox(
-                height: espaciado,
-              ),
-              
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-            backgroundColor: Colors.purple,
-            icon: Icon(Icons.add),
-            label: Text('Añadir Producto'),
-            onPressed: () {}));
+
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: botonesFlotantes(),),);
   }
+  int _statusButton=0;
+
+  static const  int inicial=0;
+  static const int precionado=1;
+
+  List<Widget> botonesFlotantes(){
+    switch(_statusButton){
+      case precionado:
+        return <Widget>[
+        AnimatedOpacity(
+          opacity: 1.0,
+          child:
+          FloatingActionButton(
+              backgroundColor: Colors.purple,
+              child: Icon(Icons.add),
+              onPressed: () {
+                setState(() {
+
+                  _statusButton=inicial;
+                });
+              }),  duration: Duration(seconds: 5))
+
+        ];
+      case inicial:
+        return <Widget>[
+          FloatingActionButton(
+              heroTag: "buscar-item",
+              backgroundColor: Colors.grey.withOpacity(0.6),
+              child: Icon(Icons.search),
+              onPressed: () {}),
+          SizedBox(
+              height:10.0
+          ),
+          FloatingActionButton(
+              heroTag: "nuevo-item",
+              backgroundColor: Colors.grey.withOpacity(0.6),
+              child: Icon(Icons.create),
+              onPressed: () {}
+              ),
+          SizedBox(
+              height:10.0
+          ),
+          AnimatedOpacity(
+            opacity: 1.0,
+              child:
+          FloatingActionButton.extended(
+              backgroundColor: Colors.purple,
+              icon: Icon(Icons.add),
+              label: Text('Añadir Item'),
+              onPressed: () {
+                setState(() {
+                  _statusButton=precionado;
+                });
+              })
+              , duration: Duration(milliseconds: 3000))
+
+        ];
+
+    }
+    return null;
+
+  }
+
+  List<Color> coloresSobraTexto(){
+
+    List<Color> colores = new List<Color>();
+    colores.add(Theme.of(context).primaryColor.withOpacity(0.2));
+    colores.add(Theme.of(context).primaryColor.withOpacity(0.2));
+
+  return colores;
+  }
+
 }

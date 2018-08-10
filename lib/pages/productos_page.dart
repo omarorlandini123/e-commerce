@@ -4,6 +4,7 @@ import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/pages/detalle_producto_page.dart';
+import 'package:ecommerce/pages/items_page.dart';
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
@@ -71,7 +72,7 @@ class _ProductosPageState extends State<ProductosPage>
       return FloatingActionButton(
           elevation: 4.0,
           child: new Icon(Icons.add),
-          backgroundColor: Colors.purple,
+          backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {
             Navigator.of(context).pushNamed(IngresoProductoPage.tag);
           });
@@ -165,6 +166,11 @@ class _ProductosPageState extends State<ProductosPage>
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mis Empresas', () {
       Navigator.of(context).popAndPushNamed(MisEmpresasPage.tag);
     }));
+
+    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mi Almacen', () {
+      Navigator.of(context).popAndPushNamed(ItemsPage.tag);
+    }));
+
 
     tabController = new TabController(length: 3, vsync: this);
     _controller = new AnimationController(

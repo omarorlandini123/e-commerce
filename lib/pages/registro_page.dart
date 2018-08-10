@@ -211,7 +211,7 @@ class _RegistroPageState extends State<RegistroPage> {
               Container(
                   margin: EdgeInsets.only(left: 24.0),
                   child: RaisedButton(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
                       elevation: 2.0,
                       child: Text("Escanear"),
@@ -253,7 +253,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   child: Padding(
                       padding: EdgeInsets.only(left: 5.0),
                       child: RaisedButton(
-                          color: Colors.purple,
+                          color: Theme.of(context).primaryColor,
                           textColor: Colors.white,
                           elevation: 2.0,
                           child: Text("Frontal"),
@@ -262,7 +262,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   child: Padding(
                       padding: EdgeInsets.only(left: 5.0),
                       child: RaisedButton(
-                          color: Colors.purple,
+                          color: Theme.of(context).primaryColor,
                           textColor: Colors.white,
                           elevation: 2.0,
                           child: Text("Reverso"),

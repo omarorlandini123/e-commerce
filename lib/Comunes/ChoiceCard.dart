@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/diseno/Choice.dart';
+import 'package:ecommerce/comunes/Choice.dart';
 
 const List<Choice> choices = const <Choice>[
   const Choice(title: '', icon: Icons.check),

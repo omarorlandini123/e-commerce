@@ -12,7 +12,8 @@ dependencies:
   barcode_scan: "^0.0.4"
   image_picker:
   
- 
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

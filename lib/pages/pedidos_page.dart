@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/productos_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
+import 'package:ecommerce/pages/items_page.dart';
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
@@ -99,7 +100,7 @@ class _PedidosPageState extends State<PedidosPage>
       return FloatingActionButton(
           elevation: 4.0,
           child: new Icon(Icons.add),
-          backgroundColor: Colors.purple[700],
+          backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {});
     else
       return null;
@@ -296,6 +297,10 @@ class _PedidosPageState extends State<PedidosPage>
     
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mis Empresas', () {
       Navigator.of(context).popAndPushNamed(MisEmpresasPage.tag);
+    }));
+
+    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mi Almacen', () {
+      Navigator.of(context).popAndPushNamed(ItemsPage.tag);
     }));
 
     tabController = new TabController(length: 3, vsync: this);

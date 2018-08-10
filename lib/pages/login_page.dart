@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             Navigator.of(context).pushNamed(ValidarNumeroPage.tag);
           },
-          color: Colors.purple,
+          color: Theme.of(context).primaryColor,
           child:
               Text('Solicitar Registro', style: TextStyle(color: Colors.white)),
         ),
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Eres Bienvenido'),
+        title: Text('Bienvenido a Freeler'),
         
       ),
       body: Center(

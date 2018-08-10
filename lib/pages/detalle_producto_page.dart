@@ -21,7 +21,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage> {
   final myController = TextEditingController();
 
   _DetalleProductoPageState(String imageURL){
-    if(imageURL!=null && !imageURL.isEmpty ) {
+    if(imageURL!=null && imageURL.isNotEmpty ) {
       this.imageURL = imageURL;
     }else{
       this.imageURL="assets/imgs/hamburguesa.jpg";
@@ -233,7 +233,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage> {
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-            backgroundColor: Colors.purple,
+            backgroundColor: Theme.of(context).primaryColor,
             icon: Icon(Icons.save),
             label: Text('Guardar'),
             onPressed: () {}));

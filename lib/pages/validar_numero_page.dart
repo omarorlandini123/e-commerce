@@ -37,7 +37,7 @@ class _ValidarNumeroPageState extends State<ValidarNumeroPage> {
           onPressed: () {
             Navigator.of(context).pushNamed(RegistroPage.tag);
           },
-          color: Colors.purple,
+          color: Theme.of(context).primaryColor,
           child: Text('Enviar Código', style: TextStyle(color: Colors.white)),
         ),
       ),

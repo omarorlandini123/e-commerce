@@ -3,6 +3,7 @@ import 'package:ecommerce/pages/pedidos_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/productos_page.dart';
+import 'package:ecommerce/pages/items_page.dart';
 
 class MisEmpresasPage extends StatefulWidget {
   static String tag = 'mis-empresas-page';
@@ -121,6 +122,10 @@ class _MisEmpresasPageState extends State<MisEmpresasPage>
 
     lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mis Empresas', () {
       Navigator.of(context);
+    }));
+
+    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mi Almacen', () {
+      Navigator.of(context).popAndPushNamed(ItemsPage.tag);
     }));
 
     tabController = new TabController(length: 3, vsync: this);

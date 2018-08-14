@@ -72,9 +72,9 @@ class _ProductosPageState extends State<ProductosPage>
       return FloatingActionButton(
           elevation: 4.0,
           child: new Icon(Icons.add),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).buttonColor,
           onPressed: () {
-            Navigator.of(context).pushNamed(IngresoProductoPage.tag);
+            Navigator.of(context).pushNamed(ItemsPage.tag);
           });
     else
       return null;
@@ -159,15 +159,15 @@ class _ProductosPageState extends State<ProductosPage>
       Navigator.of(context);
     }));
 
-    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Pedidos', () {
+    lstMenu.add(OpcionMenu(Icon(Icons.reorder), 'Pedidos', () {
       Navigator.of(context).popAndPushNamed(PedidosPage.tag);
     }));
 
-    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mis Empresas', () {
+    lstMenu.add(OpcionMenu(Icon(Icons.domain), 'Mis Empresas', () {
       Navigator.of(context).popAndPushNamed(MisEmpresasPage.tag);
     }));
 
-    lstMenu.add(OpcionMenu(Icon(Icons.receipt), 'Mi Almacen', () {
+    lstMenu.add(OpcionMenu(Icon(Icons.local_convenience_store), 'Mi Almacen', () {
       Navigator.of(context).popAndPushNamed(ItemsPage.tag);
     }));
 
@@ -282,7 +282,10 @@ class _ProductosPageState extends State<ProductosPage>
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: lstMenu.map((OpcionMenu opcion) {
                               return new ListTile(
-                                leading: new CircleAvatar(child: opcion.icono),
+                                leading: new CircleAvatar(
+                                  backgroundColor: Colors.orange,
+                                    foregroundColor: Colors.white,
+                                    child: opcion.icono),
                                 title: new Text(opcion.etiqueta),
                                 onTap: opcion.onPressed,
                               );

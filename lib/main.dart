@@ -10,6 +10,7 @@ import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/pages/detalle_producto_page.dart';
 import 'package:ecommerce/pages/items_page.dart';
+import 'package:ecommerce/pages/items_detalle_page.dart';
 
 void main() => runApp(new MyApp());
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
     MisEmpresasPage.tag : (context)=>MisEmpresasPage(),
     DetalleProductoPage.tag : (context)=>DetalleProductoPage(""),
     ItemsPage.tag : (context)=>ItemsPage(),
+    ItemsDetallePage.tag: (context)=>ItemsDetallePage(),
   };
 
   MyApp();
@@ -39,8 +41,9 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: Colors.orange[800],
-        accentColor: Colors.orangeAccent[600],
+        primaryColor:  Colors.indigo,//const Color.fromARGB(0x00, 0x70, 0xC0, 0x01),
+        buttonColor: Colors.orange,
+        accentColor: Colors.indigoAccent,
       ),
       title: 'E-commerce',
       home: LoginPage(),

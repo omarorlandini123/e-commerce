@@ -32,7 +32,7 @@ class _PreviewCardState extends State<PreviewCard> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Hero(
-            tag:'image-hero'+tag.titulo,
+            tag:'image-hero',
             child:Container(
               constraints: new BoxConstraints.expand(
                 height: 200.0,

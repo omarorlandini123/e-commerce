@@ -25,7 +25,7 @@ class _ItemsPageState extends State<ItemsPage>
     items = new List<ItemAlmacen>();
     itemsSelected= new List<ItemAlmacen>();
     items.add(new ItemAlmacen("Laptop", "Laptop color negro HP", 1.0));
-    items.add(new ItemAlmacen("Televisor LG", "Televisor LG32\'\' ", 1.0));
+    //items.add(new ItemAlmacen("Televisor LG", "Televisor LG32\'\' ", 1.0));
 
   }
 

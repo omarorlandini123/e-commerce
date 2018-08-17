@@ -48,6 +48,7 @@ class ListTabProductos {
 
 class _ProductosPageState extends State<ProductosPage>
     with TickerProviderStateMixin {
+      
   ListTabProductos lista;
   TabController _tabController;
   bool mostrarBoton = true;

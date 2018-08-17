@@ -117,7 +117,7 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
           scrollDirection: Axis.vertical,
           children: <Widget>[
             Hero(
-              tag: 'image-hero'+itemSelect.titulo,
+              tag: 'image-hero',
               child: Container(
                   constraints: new BoxConstraints.expand(
                     height: MediaQuery.of(context).size.height * 0.25,

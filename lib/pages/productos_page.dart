@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/pedidos_page.dart';
-import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/pages/detalle_producto_page.dart';
 import 'package:ecommerce/pages/items_page.dart';
+
+import 'package:ecommerce/entidades/OpcionMenu.dart';
+import 'package:ecommerce/entidades/Producto.dart';
+import 'package:ecommerce/entidades/ItemAlmacen.dart';
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
@@ -60,10 +63,28 @@ class _ProductosPageState extends State<ProductosPage>
 
   List<OpcionMenu> lstMenu;
 
-  List<Widget> tarjetasLista(String image, String nombre, String costo) {
+  List<Widget> tarjetasListaTerceros() {
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
-      lista.add(tarjeta(image, nombre, costo));
+      Producto prod = new Producto("Producto Terceros "+(i+1).toString(),"Detalles "+(i+1).toString(), 12.0,  true);
+      prod.imagenPreview= new AssetImage("assets/imgs/pollito.jpeg");
+      lista.add(tarjeta(prod));
+    }
+    return lista;
+  }
+
+  List<Widget> tarjetasLista() {
+    List<Widget> lista = new List<Widget>();
+    for (var i = 0; i < 15; i++) {
+      Producto prod = new Producto("Producto "+(i+1).toString(),"Detalles "+(i+1).toString(), 16.0, false, new DateTime.now());
+      prod.imagenPreview= new AssetImage("assets/imgs/hamburguesa.jpg");
+      ItemAlmacen item = new ItemAlmacen("Item 1","detalle 1", 2.0);
+      item.preview = AssetImage("assets/imgs/hamburguesa.jpg");
+      ItemAlmacen item2 = new ItemAlmacen("Item 2","detalle 2", 33.0);
+      item2.preview = AssetImage("assets/imgs/hamburguesa.jpg");
+      prod.addItem(item);
+      prod.addItem(item2);
+      lista.add(tarjeta(prod));
     }
     return lista;
   }
@@ -81,7 +102,8 @@ class _ProductosPageState extends State<ProductosPage>
       return null;
   }
 
-  Card tarjeta(String image, String nombre, String costo) {
+  Card tarjeta(Producto prod) {
+    
     return new Card(
       elevation: 3.0,
       child: Row(
@@ -93,17 +115,19 @@ class _ProductosPageState extends State<ProductosPage>
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DetalleProductoPage(image)),
+                MaterialPageRoute(builder: (context) => DetalleProductoPage(prod)),
               );
             },
-            child: Container(
+            child: Hero(
+              tag:'image-hero'+prod.nombreProducto,
+              child:Container(
               margin: EdgeInsets.only(
                   top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
               child: CircleAvatar(
                 radius: 35.0,
-                backgroundImage: new AssetImage(image),
+                backgroundImage:prod.imagenPreview,
               ),
-            ),
+            ),)
           ),
           Expanded(
             child: Container(
@@ -119,7 +143,7 @@ class _ProductosPageState extends State<ProductosPage>
                       children: <Widget>[
                         Material(
                             child: Text(
-                          nombre,
+                          prod.nombreProducto,
                           style: TextStyle(fontSize: 16.0),
                         )),
                         SizedBox(
@@ -127,7 +151,7 @@ class _ProductosPageState extends State<ProductosPage>
                         ),
                         Material(
                             child: Text(
-                          costo,
+                          "S/ "+prod.precio.toString(),
                           style: TextStyle(fontSize: 16.0),
                         ))
                       ],
@@ -197,8 +221,7 @@ class _ProductosPageState extends State<ProductosPage>
       ),
       new Container(
         child: ListView(
-          children: tarjetasLista(
-              'assets/imgs/hamburguesa.jpg', "Hamburguesa", "Costo: S/10.00"),
+          children: tarjetasLista(),
         ),
       ),
     );
@@ -206,8 +229,7 @@ class _ProductosPageState extends State<ProductosPage>
         new Tab(text: 'Terceros'),
         new Container(
           child: ListView(
-            children: tarjetasLista('assets/imgs/pollito.jpeg',
-                "Pollito a la Brasa", "Costo: S/24.00"),
+            children: tarjetasListaTerceros(),
           ),
         ));
 

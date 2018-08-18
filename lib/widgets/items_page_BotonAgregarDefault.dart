@@ -19,7 +19,7 @@ class _BotonAgregarDefaultState extends State<BotonAgregarDefault> {
   Widget build(BuildContext context) {
     return FloatingActionButton(onPressed: this.onPressed,
       child: Icon(Icons.add),
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).buttonColor,
     );
   }
 }

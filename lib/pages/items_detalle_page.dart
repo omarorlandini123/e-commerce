@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ItemsDetallePage extends StatefulWidget {
   static String tag = "item-detalle-page";
-  ItemAlmacen itemSelect ;
+  ItemAlmacen itemSelect;
   ItemsDetallePage([this.itemSelect]);
   @override
   _ItemsDetallePageState createState() => _ItemsDetallePageState(itemSelect);
@@ -14,7 +14,7 @@ class ItemsDetallePage extends StatefulWidget {
 
 class _ItemsDetallePageState extends State<ItemsDetallePage> {
   File fotoFondo;
-  ItemAlmacen itemSelect ;
+  ItemAlmacen itemSelect;
   _ItemsDetallePageState([this.itemSelect]);
 
   Future<Null> _neverSatisfied() async {
@@ -57,7 +57,7 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
 
   Widget boton() {
     return FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).buttonColor,
         child: editando ? Icon(Icons.save) : Icon(Icons.edit),
         onPressed: () {
           setState(() {
@@ -117,13 +117,13 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
           scrollDirection: Axis.vertical,
           children: <Widget>[
             Hero(
-              tag: 'image-hero',
+              tag: 'image-hero' + itemSelect.titulo,
               child: Container(
                   constraints: new BoxConstraints.expand(
                     height: MediaQuery.of(context).size.height * 0.25,
                   ),
                   alignment: Alignment.bottomLeft,
-                  padding: new EdgeInsets.only(left: 16.0, bottom: 8.0),
+                  padding: new EdgeInsets.only( bottom: 8.0),
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
                       colorFilter: new ColorFilter.mode(
@@ -135,18 +135,23 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
                     ),
                   ),
                   child: Container(
+                     padding: EdgeInsets.all(6.0),
+                    constraints: BoxConstraints.tightForFinite(),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                      shape: BoxShape.circle,
+                      color: Colors.white,                     
                     ),
-                    child: IconButton(
-                      icon: Icon(Icons.photo_camera),
+                    child: MaterialButton(                                           
+                      
+                      child: Icon(Icons.photo_camera, size: 24.0,),                      
                       onPressed: () {
                         tomarFoto();
                       },
                     ),
-                  )),
+                  )
+                  ),
             ),
+            
             SizedBox(
               height: 25.0,
             ),

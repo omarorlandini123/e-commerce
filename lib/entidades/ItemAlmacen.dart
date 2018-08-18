@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 class ItemAlmacen {
 
-    Image preview;
+    ImageProvider preview;
     String titulo;
     String descripcion;
     double cantidad;

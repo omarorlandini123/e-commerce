@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
+//import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ecommerce/pages/login_page.dart';
 import 'package:ecommerce/pages/validar_numero_page.dart';
 import 'package:ecommerce/pages/registro_page.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
     PedidosPage.tag: (context)=>PedidosPage(),
     IngresoProductoPage.tag : (context)=>IngresoProductoPage(),
     MisEmpresasPage.tag : (context)=>MisEmpresasPage(),
-    DetalleProductoPage.tag : (context)=>DetalleProductoPage(""),
+    DetalleProductoPage.tag : (context)=>DetalleProductoPage(),
     ItemsPage.tag : (context)=>ItemsPage(),
     ItemsDetallePage.tag: (context)=>ItemsDetallePage(),
   };

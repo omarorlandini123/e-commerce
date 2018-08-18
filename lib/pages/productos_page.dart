@@ -79,9 +79,7 @@ class _ProductosPageState extends State<ProductosPage>
       Producto prod = new Producto("Producto "+(i+1).toString(),"Detalles "+(i+1).toString(), 16.0, false, new DateTime.now());
       prod.imagenPreview= new AssetImage("assets/imgs/hamburguesa.jpg");
       ItemAlmacen item = new ItemAlmacen("Item 1","detalle 1", 2.0);
-      item.preview = AssetImage("assets/imgs/hamburguesa.jpg");
       ItemAlmacen item2 = new ItemAlmacen("Item 2","detalle 2", 33.0);
-      item2.preview = AssetImage("assets/imgs/hamburguesa.jpg");
       prod.addItem(item);
       prod.addItem(item2);
       lista.add(tarjeta(prod));

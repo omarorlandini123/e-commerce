@@ -301,6 +301,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
               padding: new EdgeInsets.only(bottom: 8.0),
               decoration: new BoxDecoration(
                 image: new DecorationImage(
+                  
                   colorFilter: new ColorFilter.mode(
                       Colors.black.withOpacity(1.0), BlendMode.dstATop),
                   image: fotoFondo == null

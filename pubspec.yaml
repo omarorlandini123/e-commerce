@@ -8,8 +8,8 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  contacts_service:
   cupertino_icons: ^0.1.2
+  contacts_service: ^0.0.8
   #barcode_scan: "^0.0.4"
   image_picker:
   

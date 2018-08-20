@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
+import 'package:ecommerce/entidades/Producto.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ecommerce/pages/detalle_producto_page.dart';
 
 class ItemsDetallePage extends StatefulWidget {
   static String tag = "item-detalle-page";
@@ -56,6 +58,9 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
   bool editando = false;
 
   Widget boton() {
+    if (itemSelect == null) {
+      editando = true;
+    }
     return FloatingActionButton(
         backgroundColor: Theme.of(context).buttonColor,
         child: editando ? Icon(Icons.save) : Icon(Icons.edit),
@@ -72,6 +77,7 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
   @override
   Widget build(BuildContext context) {
     final txtNombreProducto = TextFormField(
+      initialValue: itemSelect == null ? "" : itemSelect.titulo,
       style: TextStyle(
           fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
@@ -84,6 +90,7 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
     );
 
     final txtDetalleProducto = TextFormField(
+      initialValue: itemSelect == null ? "" : itemSelect.descripcion,
       maxLines: 4,
       maxLengthEnforced: true,
       maxLength: 250,
@@ -100,58 +107,77 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: new Text("Detalle de Item"),
+          title: itemSelect == null
+              ? new Text("Nuevo Item")
+              : new Text("Detalle de Item"),
           actions: <Widget>[
-            FlatButton(
-              child: Text(
-                "Ofrecer",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: _neverSatisfied,
-            )
+            itemSelect == null || editando
+                ? Container()
+                : FlatButton(
+                    child: Text(
+                      "Ofrecer",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context){
+
+                              Producto prod = new Producto(itemSelect.titulo, itemSelect.descripcion, 0.0, true);
+                              //prod.imagenPreview= itemSelect.preview;
+                              prod.addItem(itemSelect);
+                             return DetalleProductoPage(prod);
+                              }),
+                      );
+                    },
+                  )
           ],
         ),
         body: ListView(
           scrollDirection: Axis.vertical,
           children: <Widget>[
             Hero(
-              tag: 'image-hero' + itemSelect.titulo,
+              tag: 'image-hero' + (itemSelect == null ? "" : itemSelect.titulo),
               child: Container(
                   constraints: new BoxConstraints.expand(
                     height: MediaQuery.of(context).size.height * 0.25,
                   ),
                   alignment: Alignment.bottomLeft,
-                  padding: new EdgeInsets.only( bottom: 8.0),
+                  padding: new EdgeInsets.only(bottom: 8.0),
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
                       colorFilter: new ColorFilter.mode(
                           Colors.black.withOpacity(1.0), BlendMode.dstATop),
                       image: fotoFondo == null
-                          ? new AssetImage("assets/imgs/hamburguesa.jpg")
+                          ? itemSelect == null
+                              ? new AssetImage(
+                                  "assets/imgs/image_not_found.png")
+                              : new AssetImage("assets/imgs/hamburguesa.jpg")
                           : FileImage(fotoFondo),
                       fit: BoxFit.cover,
                     ),
                   ),
                   child: Container(
-                     padding: EdgeInsets.all(6.0),
+                    padding: EdgeInsets.all(6.0),
                     constraints: BoxConstraints.tightForFinite(),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white,                     
+                      color: Colors.white,
                     ),
-                    child: MaterialButton(                                           
-                      
-                      child: Icon(Icons.photo_camera, size: 24.0,),                      
+                    child: MaterialButton(
+                      child: Icon(
+                        Icons.photo_camera,
+                        size: 24.0,
+                      ),
                       onPressed: () {
                         tomarFoto();
                       },
                     ),
-                  )
-                  ),
+                  )),
             ),
-            
             SizedBox(
               height: 25.0,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/pedidos_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
+import 'package:ecommerce/entidades/Empresa.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/productos_page.dart';
 import 'package:ecommerce/pages/items_page.dart';
@@ -24,6 +25,7 @@ class _MisEmpresasPageState extends State<MisEmpresasPage>
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<OpcionMenu> lstMenu;
+  List<Empresa> empresas;
 
   List<Widget> tarjetasLista(String image, String nombre, String costo) {
     List<Widget> lista = new List<Widget>();
@@ -109,6 +111,11 @@ class _MisEmpresasPageState extends State<MisEmpresasPage>
   @override
   void initState() {
     super.initState();
+    empresas= new List<Empresa>(); 
+    for(int y=0;y<50;y++){
+      empresas.add(new Empresa("Empresa "+y.toString(), 
+      "Detalles empresa "+y.toString(), "DOC"+y.toString(),Empresa.TIPO_DOCUMENTO_DNI ,Empresa.TIPO_EMPRESA_PERSONAL));
+    }
 
     lstMenu = new List<OpcionMenu>();
 
@@ -167,39 +174,37 @@ class _MisEmpresasPageState extends State<MisEmpresasPage>
   AppBar getAppBar() {
     if (_searchOn) {
       return new AppBar(
-        title: 
-            TextField(
-              onChanged: (texto){
-                  
-              },  
-              decoration: InputDecoration(
-                 fillColor:Colors.white,
-                 filled: true,
-                hintText: 'Buscar',
-                suffixIcon: Icon(Icons.search)
-              ),
-            )
-          
-      );
+          title: TextField(
+        onChanged: (texto) {},
+        decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            hintText: 'Buscar',
+            suffixIcon: Icon(Icons.search)),
+      ));
     } else {
       return new AppBar(
         title: Text('Mis Empresas'),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: (){
-                  setState(() {
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              setState(() {
                 _searchOn = true;
               });
-                },
-              )
-            ],
+            },
+          )
+        ],
       );
     }
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: getAppBar(),
@@ -280,17 +285,22 @@ class _MisEmpresasPageState extends State<MisEmpresasPage>
         ),
       ),
       body: Container(
-        child: ListView(children: <Widget>[
-          new ListTile(
+        child: ListView(children: 
+        empresas.map((Empresa emp){
+          return new ListTile(
               leading: const Icon(Icons.business),
-              title: const Text('El gran sandwich'),
+              title: Text(emp.nombre),
               //subtitle: const Text(''),
               enabled: true,
               onLongPress: () {},
-              onTap: () {/* react to the tile being tapped */})
-        ]),
+              onTap: () {
+
+              });
+        }).toList()),
+        
       ),
       floatingActionButton: getFloatButton(),
     );
   }
 }
+

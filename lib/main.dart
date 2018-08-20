@@ -10,6 +10,7 @@ import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/pages/detalle_producto_page.dart';
 import 'package:ecommerce/pages/items_page.dart';
 import 'package:ecommerce/pages/items_detalle_page.dart';
+import 'package:ecommerce/pages/mis_contactos_page.dart';
 
 void main() => runApp(new MyApp());
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
     DetalleProductoPage.tag : (context)=>DetalleProductoPage(),
     ItemsPage.tag : (context)=>ItemsPage(),
     ItemsDetallePage.tag: (context)=>ItemsDetallePage(),
+    MisContactosPage.tag: (context)=>MisContactosPage(),
   };
 
   MyApp();

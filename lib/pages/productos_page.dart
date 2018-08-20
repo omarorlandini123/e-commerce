@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/pedidos_page.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
+import 'mis_contactos_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/pages/detalle_producto_page.dart';
 import 'package:ecommerce/pages/items_page.dart';
@@ -193,7 +194,9 @@ class _ProductosPageState extends State<ProductosPage>
     lstMenu.add(OpcionMenu(Icon(Icons.local_convenience_store), 'Mi Almacen', () {
       Navigator.of(context).popAndPushNamed(ItemsPage.tag);
     }));
-
+    lstMenu.add(OpcionMenu(Icon(Icons.contacts), 'Mis Contactos', () {
+      Navigator.of(context).popAndPushNamed(MisContactosPage.tag);
+    }));
 
     tabController = new TabController(length: 3, vsync: this);
     _controller = new AnimationController(

@@ -261,7 +261,7 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
                   color: Color.fromRGBO(23, 34, 45, 0.2),
                   colorBlendMode: BlendMode.darken,
                 ),
-                title: Text('Nuevo Producto')),
+                title: Text('Nueva Empresa')),
           ),
           new SliverFixedExtentList(
             itemExtent: 450.0,
@@ -304,16 +304,7 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
                   ],
                 );
               },
-              childCount: 0,
-            ),
-          ),
-          new SliverFixedExtentList(
-            itemExtent: 80.0,
-            delegate: new SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return  tarjeta('assets/imgs/hamburguesa.png','hamburguesa.jpg','');
-              },
-              childCount: 60,
+              childCount: 1,
             ),
           ),
         ],

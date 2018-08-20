@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'productos_page.dart';
-//import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
@@ -241,7 +241,7 @@ class _RegistroPageState extends State<RegistroPage> {
               Expanded(
                   child: Padding(
                       padding: EdgeInsets.only(left: 5.0),
-                      child: Image.asset("assets/imgs/pollito.jpeg")))
+                      child: fotoFrontal2==null? new Text("Toma una foto"):Image.file(fotoFrontal2)))
             ],
           ),
           SizedBox(
@@ -266,7 +266,7 @@ class _RegistroPageState extends State<RegistroPage> {
                           textColor: Colors.white,
                           elevation: 2.0,
                           child: Text("Reverso"),
-                          onPressed: scan)))
+                          onPressed: tomarFoto2)))
             ],
           ),
           SizedBox(
@@ -306,6 +306,17 @@ class _RegistroPageState extends State<RegistroPage> {
     );
   }
 
+  File fotoFrontal2;
+
+  Future tomarFoto2() async {
+    try {
+      File img = await ImagePicker.pickImage(source: ImageSource.camera);
+      setState(() {
+        fotoFrontal2 = img;
+      });
+    } catch (e) {}
+  }
+
   File fotoFrontal;
 
   Future tomarFoto() async {
@@ -318,26 +329,26 @@ class _RegistroPageState extends State<RegistroPage> {
   }
 
   Future scan() async {
-    // try {
-    //   String barcode = await BarcodeScanner.scan();
-    //   setState(() {
-    //     this.barcode = barcode;
-    //     myController.text = barcode;
-    //   });
-    // } on PlatformException catch (e) {
-    //   if (e.code == BarcodeScanner.CameraAccessDenied) {
-    //     setState(() {
-    //       this.barcode =
-    //           'La aplicación no tiene permiso para acceder a la cámara';
-    //     });
-    //   } else {
-    //     setState(() => this.barcode = 'Error desconocido: $e');
-    //   }
-    // } on FormatException {
-    //   setState(() => this.barcode =
-    //       'null (User returned using the "back"-button before scanning anything. Result)');
-    // } catch (e) {
-    //   setState(() => this.barcode = 'Unknown error: $e');
-    // }
+    try {
+      String barcode = await BarcodeScanner.scan();
+      setState(() {
+        this.barcode = barcode;
+        myController.text = barcode;
+      });
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          this.barcode =
+              'La aplicación no tiene permiso para acceder a la cámara';
+        });
+      } else {
+        setState(() => this.barcode = 'Error desconocido: $e');
+      }
+    } on FormatException {
+      setState(() => this.barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this.barcode = 'Unknown error: $e');
+    }
   }
 }

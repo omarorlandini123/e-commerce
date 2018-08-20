@@ -60,7 +60,7 @@ class _ProductosPageState extends State<ProductosPage>
   Animation<double> _drawerContentsOpacity;
   Animation<Offset> _drawerDetailsPosition;
   bool _showDrawerContents = true;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  
 
   List<OpcionMenu> lstMenu;
 
@@ -254,12 +254,6 @@ class _ProductosPageState extends State<ProductosPage>
     tabController.dispose();
   }
 
-  void _showNotImplementedMessage() {
-    Navigator.pop(context); // Dismiss the drawer.
-    _scaffoldKey.currentState.showSnackBar(const SnackBar(
-        content: const Text("The drawer's items don't do anything")));
-  }
-
   TabController tabController;
 
   @override
@@ -328,13 +322,13 @@ class _ProductosPageState extends State<ProductosPage>
                               children: <Widget>[
                                 new ListTile(
                                   leading: const Icon(Icons.add),
-                                  title: const Text('Add account'),
-                                  onTap: _showNotImplementedMessage,
+                                  title: const Text('Agregar Cuenta'),
+                                  onTap:(){print("Agregar Cuenta clicked");} ,
                                 ),
                                 new ListTile(
                                   leading: const Icon(Icons.settings),
-                                  title: const Text('Manage accounts'),
-                                  onTap: _showNotImplementedMessage,
+                                  title: const Text('Administrar cuentas'),
+                                  onTap:(){print("Administrar Cuenta clicked");},
                                 ),
                               ],
                             ),

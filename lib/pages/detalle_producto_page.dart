@@ -113,15 +113,15 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
                         )),
                       ],
                     )),
-                    Container(
-                        alignment: Alignment.centerRight,
-                        margin: EdgeInsets.only(
-                            top: 10.0, bottom: 10.0, right: 15.0),
-                        child: IconButton(
-                          icon: Icon(Icons.share),
-                          onPressed: () {},
-                          iconSize: 30.0,
-                        ))
+                    // Container(
+                    //     alignment: Alignment.centerRight,
+                    //     margin: EdgeInsets.only(
+                    //         top: 10.0, bottom: 10.0, right: 15.0),
+                    //     child: IconButton(
+                    //       icon: Icon(Icons.share),
+                    //       onPressed: () {},
+                    //       iconSize: 30.0,
+                    //     ))
                   ],
                 )),
           )
@@ -177,11 +177,9 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
 
   List<Widget> body() {
     List<Widget> lista = new List<Widget>();
-    
-      
-        lista.add(getHero(productoSel));
-      
-     
+
+    lista.add(getHero(productoSel));
+
     final txtNombreProducto = TextFormField(
       initialValue: productoSel.nombreProducto,
       style: TextStyle(
@@ -225,7 +223,31 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
     );
-
+    final chkTerceros = Container(
+      height: 43.0,
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black54,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      padding: EdgeInsets.only(left: 23.0),
+      child: Row(
+        children: <Widget>[
+          Checkbox(
+            value: productoSel.esTercerizable,
+            onChanged: (selected) {
+              productoSel.esTercerizable = selected;
+              setState(() {
+                productoSel.esTercerizable != productoSel.esTercerizable;
+              });
+            },
+          ),
+          Expanded(child: Text("Permitir que otro freeler venda este producto"))
+        ],
+      ),
+    );
     final txtFecha = Container(
       height: 43.0,
       alignment: Alignment.centerLeft,
@@ -279,6 +301,10 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
             ],
           ),
           SizedBox(
+            height: 25.0,
+          ),
+          chkTerceros,
+          SizedBox(
             height: 75.0,
           ),
         ],
@@ -291,43 +317,41 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
   Hero getHero(Producto prod) {
     return new Hero(
         tag: 'image-hero' + productoSel.nombreProducto,
-        
-        child:Padding(padding: EdgeInsets.all(10.0),child: Card(
-          
-          child: Container(   
-            
-            height: 250.0,
-              alignment: Alignment.bottomLeft,
-              padding: new EdgeInsets.only(bottom: 8.0),
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(1.0), BlendMode.dstATop),
-                  image: fotoFondo == null
-                      ? prod.imagenPreview //new AssetImage("assets/imgs/hamburguesa.jpg")
-                      : FileImage(fotoFondo),
-                  fit: BoxFit.cover,
-                ),
-              ),
+        child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Card(
               child: Container(
-                padding: EdgeInsets.all(6.0),
-                constraints: BoxConstraints.tightForFinite(),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: MaterialButton(
-                  child: Icon(
-                    Icons.photo_camera,
-                    size: 24.0,
+                  height: 250.0,
+                  alignment: Alignment.bottomLeft,
+                  padding: new EdgeInsets.only(bottom: 8.0),
+                  decoration: new BoxDecoration(
+                    image: new DecorationImage(
+                      colorFilter: new ColorFilter.mode(
+                          Colors.black.withOpacity(1.0), BlendMode.dstATop),
+                      image: fotoFondo == null
+                          ? prod.imagenPreview== null?new AssetImage("assets/imgs/hamburguesa.jpg"):prod.imagenPreview
+                          : FileImage(fotoFondo),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  onPressed: () {
-                    tomarFoto();
-                  },
-                ),
-              )),
-        )));
+                  child: Container(
+                    padding: EdgeInsets.all(6.0),
+                    constraints: BoxConstraints.tightForFinite(),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: MaterialButton(
+                      child: Icon(
+                        Icons.photo_camera,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+                        tomarFoto();
+                      },
+                    ),
+                  )),
+            )));
   }
 
   @override
@@ -376,6 +400,32 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
               OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
     );
 
+    final chkTerceros = Container(
+      height: 43.0,
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black54,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      padding: EdgeInsets.only(left: 23.0),
+      child: Row(
+        children: <Widget>[
+          Checkbox(
+            value: productoSel.esTercerizable,
+            onChanged: (selected) {
+              productoSel.esTercerizable = selected;
+              setState(() {
+                productoSel.esTercerizable != productoSel.esTercerizable;
+              });
+            },
+          ),
+          Expanded(child: Text("Permitir que otro freeler venda este producto"))
+        ],
+      ),
+    );
+
     final txtFecha = Container(
       height: 43.0,
       alignment: Alignment.centerLeft,
@@ -404,7 +454,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
       ),
     );
 
-    if (productoSel.items == null || productoSel.items.length == 0) {
+    if (productoSel.items == null || productoSel.items.length <=  1) {
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
@@ -442,8 +492,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
                       colorFilter: new ColorFilter.mode(
                           Colors.black.withOpacity(1.0), BlendMode.dstATop),
                       image: fotoFondo == null
-                          ? productoSel
-                              .imagenPreview //new AssetImage("assets/imgs/hamburguesa.jpg")
+                          ? productoSel.imagenPreview == null?new AssetImage("assets/imgs/hamburguesa.jpg"):productoSel.imagenPreview 
                           : FileImage(fotoFondo),
                       fit: BoxFit.cover,
                     ),
@@ -492,6 +541,10 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
                     ],
                   ),
                   SizedBox(
+                    height: 25.0,
+                  ),
+                  chkTerceros,
+                  SizedBox(
                     height: 75.0,
                   ),
                 ],
@@ -506,8 +559,10 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
     }
     return Scaffold(
         appBar: AppBar(
-          
-          bottom: TabBar(labelColor: Colors.black,controller:  _tabController, tabs: lista.getTabs()),
+          bottom: TabBar(
+              labelColor: Colors.black,
+              controller: _tabController,
+              tabs: lista.getTabs()),
           backgroundColor: Colors.white,
           textTheme: TextTheme(
               title: TextStyle(

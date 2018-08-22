@@ -1,3 +1,4 @@
+import 'package:ecommerce/entidades/Local.dart';
 class Empresa {
   static const int TIPO_EMPRESA_PERSONAL = 0;
   static const int TIPO_EMPRESA_JURIDICA = 1;
@@ -18,11 +19,3 @@ class Empresa {
 
 }
 
-class Local {
-  String nombre;
-  String ubicacion;
-  Empresa empresa;
-
-  Local (this.nombre, this.ubicacion, this.empresa);
-
-}

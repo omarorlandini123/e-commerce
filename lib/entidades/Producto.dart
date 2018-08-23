@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
 
 class Producto {
+
+  
+
   String _nombreProducto;
 
   String get nombreProducto => _nombreProducto;

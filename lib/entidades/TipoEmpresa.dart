@@ -1,0 +1,7 @@
+
+enum TipoEmpresa{
+  SIN_TIPO,
+  EMPRESA_PERSONAL,
+  EMPRESA_JURIDICA,
+  PERSONA_LIBRE
+}

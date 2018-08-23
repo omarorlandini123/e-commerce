@@ -1,0 +1,4 @@
+enum TipoArchivo{
+  NO_DEFINIDO,
+  IMAGEN, DOCUMENTO, COMPRIMIDO
+}

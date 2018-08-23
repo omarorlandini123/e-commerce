@@ -1,0 +1,4 @@
+enum TipoDocumento{
+   NO_DEFINIDO,
+   DNI,RUC,CARNE_EXTRAN, PASAPORTE
+}

@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ecommerce/widgets/items_page_BotonAgregarDefault.dart';
-import 'package:ecommerce/widgets/items_page_PreviewCard.dart';
+
+import 'package:ecommerce/widgets/page_items_BotonAgregarDefault.dart';
+import 'package:ecommerce/widgets/page_items_PreviewCard.dart';
+
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
 import 'package:ecommerce/entidades/Producto.dart';
-import 'package:ecommerce/pages/items_detalle_page.dart';
-import 'package:ecommerce/pages/detalle_producto_page.dart';
+import 'package:ecommerce/entidades/Fotopreview.dart';
+
+import 'package:ecommerce/pages/page_items_detalle.dart';
+import 'package:ecommerce/pages/page_detalle_producto.dart';
 
 class ItemsPage extends StatefulWidget {
   static String tag = "items-page";
@@ -103,27 +107,24 @@ class _ItemsPageState extends State<ItemsPage> implements PreviewCardListener {
   }
 
   Future<Null> _convertirACombo() async {
-
-    Producto prod  = new Producto("", "", 0.0, true);
-    prod.imagenPreview=AssetImage("assets/imgs/image_not_found.png");
-    prod.items=itemsSelected;
+    Producto prod = new Producto("", "", 0.0, true);  
+    FotoPreview foto = new FotoPreview(0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+    prod.imagenPreview= null;
+    prod.items = itemsSelected;
     Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DetalleProductoPage(prod)),
-              );
-    
+      context,
+      MaterialPageRoute(builder: (context) => DetalleProductoPage(prod)),
+    );
   }
 
   Widget getAppBar() {
     if (!isSelecting) {
       return new AppBar(
-        title: new Text("Mi Almacen"),        
+        title: new Text("Mi Almacen"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: (){
-
-            },
+            onPressed: () {},
           ),
           // FlatButton(
           //   child: Text(
@@ -151,15 +152,16 @@ class _ItemsPageState extends State<ItemsPage> implements PreviewCardListener {
       ),
       backgroundColor: Colors.white,
       leading: IconButton(
-          icon: Icon(Icons.arrow_back,
+        icon: Icon(
+          Icons.arrow_back,
           color: Colors.black,
-          ),
-          onPressed: () {
-            isSelecting = false;
-            itemsSelected = new List<ItemAlmacen>();
-            setState(() {});
-          },
         ),
+        onPressed: () {
+          isSelecting = false;
+          itemsSelected = new List<ItemAlmacen>();
+          setState(() {});
+        },
+      ),
       actions: <Widget>[
         FlatButton(
           child: Text(

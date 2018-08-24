@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/pages/pedidos_page.dart';
+
+import 'package:ecommerce/pages/page_pedidos.dart';
+import 'package:ecommerce/pages/page_ingreso_producto.dart';
+import 'package:ecommerce/pages/page_productos.dart';
+import 'package:ecommerce/pages/page_items.dart';
+
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/entidades/Empresa.dart';
-import 'package:ecommerce/pages/ingreso_producto_page.dart';
-import 'package:ecommerce/pages/productos_page.dart';
-import 'package:ecommerce/entidades/TipoDocumento.dart';
 import 'package:ecommerce/entidades/TipoEmpresa.dart';
-import 'package:ecommerce/pages/items_page.dart';
+
 
 class MisEmpresasPage extends StatefulWidget {
   static String tag = 'mis-empresas-page';

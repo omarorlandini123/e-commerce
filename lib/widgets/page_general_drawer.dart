@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce/entidades/OpcionMenu.dart';
-import 'package:ecommerce/pages/pedidos_page.dart';
-import 'package:ecommerce/pages/mis_empresas_page.dart';
-import 'package:ecommerce/pages/items_page.dart';
-import 'package:ecommerce/pages/mis_contactos_page.dart';
+import 'package:ecommerce/pages/page_pedidos.dart';
+import 'package:ecommerce/pages/page_mis_empresas.dart';
+import 'package:ecommerce/pages/page_items.dart';
+import 'package:ecommerce/pages/page_mis_contactos.dart';
 class DrawerPage extends StatefulWidget {
 
 
@@ -69,7 +69,7 @@ class _DrawerPageState extends State<DrawerPage> with TickerProviderStateMixin{
       accountName: const Text('Juan Perez'),
       accountEmail: const Text('juan.perez@example.com'),
       currentAccountPicture: const CircleAvatar(
-        backgroundImage: AssetImage(""),
+        backgroundImage: AssetImage("assets/imgs/hamburguesa.jpg"),
       ),
       margin: EdgeInsets.zero,
       onDetailsPressed: () {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:ecommerce/pages/items_detalle_page.dart';
+import 'package:ecommerce/pages/page_items_detalle.dart';
 import 'package:ecommerce/entidades/Producto.dart';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
 
@@ -135,7 +135,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
   void initState() {
     super.initState();
     _date = productoSel.validez;
-    print(productoSel.nombreProducto);
+    print(productoSel.nombre);
 
     lista = new ListTabItemsAlmacen();
     lista.addItem(
@@ -181,7 +181,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
     lista.add(getHero(productoSel));
 
     final txtNombreProducto = TextFormField(
-      initialValue: productoSel.nombreProducto,
+      initialValue: productoSel.nombre,
       style: TextStyle(
           fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
@@ -194,7 +194,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
     );
 
     final txtDetalleProducto = TextFormField(
-      initialValue: productoSel.detalleProducto,
+      initialValue: productoSel.descripcion,
       maxLines: 4,
       maxLengthEnforced: true,
       maxLength: 250,
@@ -316,7 +316,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
 
   Hero getHero(Producto prod) {
     return new Hero(
-        tag: 'image-hero' + productoSel.nombreProducto,
+        tag: 'image-hero' + productoSel.nombre,
         child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Card(
@@ -357,7 +357,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
   @override
   Widget build(BuildContext context) {
     final txtNombreProducto = TextFormField(
-      initialValue: productoSel.nombreProducto,
+      initialValue: productoSel.nombre,
       style: TextStyle(
           fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
       keyboardType: TextInputType.text,
@@ -370,7 +370,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
     );
 
     final txtDetalleProducto = TextFormField(
-      initialValue: productoSel.detalleProducto,
+      initialValue: productoSel.descripcion,
       maxLines: 4,
       maxLengthEnforced: true,
       maxLength: 250,
@@ -480,7 +480,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
           ),
           body: ListView(scrollDirection: Axis.vertical, children: <Widget>[
             Hero(
-              tag: 'image-hero' + productoSel.nombreProducto,
+              tag: 'image-hero' + productoSel.nombre,
               child: Container(
                   constraints: new BoxConstraints.expand(
                     height: MediaQuery.of(context).size.height * 0.25,

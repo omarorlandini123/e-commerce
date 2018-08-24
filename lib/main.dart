@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ecommerce/pages/login_page.dart';
-import 'package:ecommerce/pages/validar_numero_page.dart';
-import 'package:ecommerce/pages/registro_page.dart';
-import 'package:ecommerce/pages/productos_page.dart';
-import 'package:ecommerce/pages/pedidos_page.dart';
-import 'package:ecommerce/pages/ingreso_producto_page.dart';
-import 'package:ecommerce/pages/mis_empresas_page.dart';
-import 'package:ecommerce/pages/detalle_producto_page.dart';
-import 'package:ecommerce/pages/items_page.dart';
-import 'package:ecommerce/pages/items_detalle_page.dart';
-import 'package:ecommerce/pages/mis_contactos_page.dart';
+import 'package:ecommerce/pages/page_login.dart';
+import 'package:ecommerce/pages/page_validar_numero.dart';
+import 'package:ecommerce/pages/page_registro.dart';
+import 'package:ecommerce/pages/page_productos.dart';
+import 'package:ecommerce/pages/page_pedidos.dart';
+import 'package:ecommerce/pages/page_ingreso_producto.dart';
+import 'package:ecommerce/pages/page_mis_empresas.dart';
+import 'package:ecommerce/pages/page_detalle_producto.dart';
+import 'package:ecommerce/pages/page_items.dart';
+import 'package:ecommerce/pages/page_items_detalle.dart';
+import 'package:ecommerce/pages/page_mis_contactos.dart';
 
 void main() => runApp(new MyApp());
 

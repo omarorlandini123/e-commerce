@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'productos_page.dart';
+import 'page_productos.dart';
 //import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';

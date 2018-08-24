@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/pages/pedidos_page.dart';
-import 'package:ecommerce/widgets/general_page_drawer.dart';
-import 'mis_contactos_page.dart';
-import 'package:ecommerce/pages/mis_empresas_page.dart';
-import 'package:ecommerce/pages/detalle_producto_page.dart';
-import 'package:ecommerce/pages/items_page.dart';
+
+import 'package:ecommerce/widgets/page_general_drawer.dart';
+import 'package:ecommerce/widgets/page_productos_ProductoCard.dart';
+
+import 'package:ecommerce/pages/page_items.dart';
 
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/entidades/Producto.dart';
@@ -71,7 +70,7 @@ class _ProductosPageState extends State<ProductosPage>
       Producto prod = new Producto("Producto Terceros "+(i+1).toString(),"Detalles "+(i+1).toString(), 12.0,  true);
       FotoPreview foto= new FotoPreview(0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
       prod.imagenPreview= foto ;
-      lista.add(tarjeta(prod));
+      lista.add(new ProductoCard(prod));
     }
     return lista;
   }
@@ -86,7 +85,7 @@ class _ProductosPageState extends State<ProductosPage>
       ItemAlmacen item2 = new ItemAlmacen("Item 2","detalle 2", 33.0);
       prod.addItem(item);
       prod.addItem(item2);
-      lista.add(tarjeta(prod));
+      lista.add(new ProductoCard(prod));
     }
     return lista;
   }
@@ -104,78 +103,6 @@ class _ProductosPageState extends State<ProductosPage>
       return null;
   }
 
-  Card tarjeta(Producto prod) {
-    
-    return new Card(
-      elevation: 3.0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DetalleProductoPage(prod)),
-              );
-            },
-            child: Hero(
-              tag:'image-hero'+prod.nombre,
-              child:Container(
-              margin: EdgeInsets.only(
-                  top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-              child: CircleAvatar(
-                radius: 35.0,
-                
-                backgroundImage:prod.imagenPreview.imageProvider,
-              ),
-            ),)
-          ),
-          Expanded(
-            child: Container(
-                margin: EdgeInsets.only(top: 10.0, left: 5.0),
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Material(
-                            child: Text(
-                          prod.nombre,
-                          style: TextStyle(fontSize: 16.0),
-                        )),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Material(
-                            child: Text(
-                          "S/ "+prod.precio.toString(),
-                          style: TextStyle(fontSize: 16.0),
-                        ))
-                      ],
-                    )),
-                    Container(
-                        alignment: Alignment.centerRight,
-                        margin: EdgeInsets.only(
-                            top: 10.0, bottom: 10.0, right: 15.0),
-                        child: IconButton(
-                          icon: Icon(Icons.share),
-                          onPressed: () {},
-                          iconSize: 30.0,
-                        ))
-                  ],
-                )),
-          )
-        ],
-      ),
-      margin: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom: 10.0),
-    );
-  }
 
   @override
   void initState() {

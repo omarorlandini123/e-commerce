@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/pages/detalle_producto_page.dart';
+import 'package:ecommerce/pages/page_detalle_producto.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';

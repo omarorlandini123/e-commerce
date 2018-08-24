@@ -1,64 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
+import 'package:ecommerce/entidades/Mostrador.dart';
+import 'package:ecommerce/entidades/FotoPreview.dart';
 
 class Producto {
 
+  int idProducto;
+  Mostrador mostrador;
+  List<ItemAlmacen> items;
+  FotoPreview imagenPreview;
+
+  String nombre;
+  String descripcion;
+  double precio;
+  double stock;
+  DateTime validez;
+  bool esTercerizable;
+
   
 
-  String _nombreProducto;
-
-  String get nombreProducto => _nombreProducto;
-
-  set nombreProducto(String nombreProducto) {
-    _nombreProducto = nombreProducto;
-  }
-  String _detalleProducto;
-
-  String get detalleProducto => _detalleProducto;
-
-  set detalleProducto(String detalleProducto) {
-    _detalleProducto = detalleProducto;
-  }
-  double _precio;
-
-  double get precio => _precio;
-
-  set precio(double precio) {
-    _precio = precio;
-  }
-  DateTime _validez;
-
-  DateTime get validez => _validez;
-
-  set validez(DateTime validez) {
-    _validez = validez;
-  }
-  bool _esTercerizable;
-
-  bool get esTercerizable => _esTercerizable;
-
-  set esTercerizable(bool esTercerizable) {
-    _esTercerizable = esTercerizable;
-  }
-  List<ItemAlmacen> _items;
-
-  List<ItemAlmacen> get items => _items;
-
-  set items(List<ItemAlmacen> items) {
-    _items = items;
-  }
-  ImageProvider _imagenPreview;
-
-  ImageProvider get imagenPreview => _imagenPreview;
-
-  set imagenPreview(ImageProvider imagenPreview) {
-    _imagenPreview = imagenPreview;
-  } 
-
-  Producto(this._nombreProducto, this._detalleProducto, this._precio, 
-      this._esTercerizable,
-      [this._validez,this._items]);
-
+  Producto(this.nombre, this.descripcion, this.precio, 
+      this.esTercerizable,
+      [this.validez,this.items]);
      
 
   void addItem(ItemAlmacen item) {

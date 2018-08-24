@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/pedidos_page.dart';
-import 'package:ecommerce/pages/ingreso_producto_page.dart';
+import 'package:ecommerce/widgets/general_page_drawer.dart';
 import 'mis_contactos_page.dart';
 import 'package:ecommerce/pages/mis_empresas_page.dart';
 import 'package:ecommerce/pages/detalle_producto_page.dart';
@@ -9,6 +9,7 @@ import 'package:ecommerce/pages/items_page.dart';
 import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/entidades/Producto.dart';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
+import 'package:ecommerce/entidades/FotoPreview.dart';
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
@@ -68,7 +69,8 @@ class _ProductosPageState extends State<ProductosPage>
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
       Producto prod = new Producto("Producto Terceros "+(i+1).toString(),"Detalles "+(i+1).toString(), 12.0,  true);
-      prod.imagenPreview= new AssetImage("assets/imgs/pollito.jpeg");
+      FotoPreview foto= new FotoPreview(0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+      prod.imagenPreview= foto ;
       lista.add(tarjeta(prod));
     }
     return lista;
@@ -78,7 +80,8 @@ class _ProductosPageState extends State<ProductosPage>
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
       Producto prod = new Producto("Producto "+(i+1).toString(),"Detalles "+(i+1).toString(), 16.0, false, new DateTime.now());
-      prod.imagenPreview= new AssetImage("assets/imgs/hamburguesa.jpg");
+      FotoPreview foto= new FotoPreview(0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+      prod.imagenPreview= foto ;
       ItemAlmacen item = new ItemAlmacen("Item 1","detalle 1", 2.0);
       ItemAlmacen item2 = new ItemAlmacen("Item 2","detalle 2", 33.0);
       prod.addItem(item);
@@ -118,13 +121,14 @@ class _ProductosPageState extends State<ProductosPage>
               );
             },
             child: Hero(
-              tag:'image-hero'+prod.nombreProducto,
+              tag:'image-hero'+prod.nombre,
               child:Container(
               margin: EdgeInsets.only(
                   top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
               child: CircleAvatar(
                 radius: 35.0,
-                backgroundImage:prod.imagenPreview,
+                
+                backgroundImage:prod.imagenPreview.imageProvider,
               ),
             ),)
           ),
@@ -142,7 +146,7 @@ class _ProductosPageState extends State<ProductosPage>
                       children: <Widget>[
                         Material(
                             child: Text(
-                          prod.nombreProducto,
+                          prod.nombre,
                           style: TextStyle(fontSize: 16.0),
                         )),
                         SizedBox(
@@ -177,44 +181,10 @@ class _ProductosPageState extends State<ProductosPage>
   void initState() {
     super.initState();
 
-    lstMenu = new List<OpcionMenu>();
-
-    lstMenu.add(OpcionMenu(Icon(Icons.storage), 'Productos', () {
-      Navigator.of(context);
-    }));
-
-    lstMenu.add(OpcionMenu(Icon(Icons.reorder), 'Pedidos', () {
-      Navigator.of(context).popAndPushNamed(PedidosPage.tag);
-    }));
-
-    lstMenu.add(OpcionMenu(Icon(Icons.domain), 'Mis Empresas', () {
-      Navigator.of(context).popAndPushNamed(MisEmpresasPage.tag);
-    }));
-
-    lstMenu.add(OpcionMenu(Icon(Icons.local_convenience_store), 'Mi Almacen', () {
-      Navigator.of(context).popAndPushNamed(ItemsPage.tag);
-    }));
-    lstMenu.add(OpcionMenu(Icon(Icons.contacts), 'Mis Contactos', () {
-      Navigator.of(context).popAndPushNamed(MisContactosPage.tag);
-    }));
+    
 
     tabController = new TabController(length: 3, vsync: this);
-    _controller = new AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-
-    _drawerContentsOpacity = new CurvedAnimation(
-      parent: new ReverseAnimation(_controller),
-      curve: Curves.fastOutSlowIn,
-    );
-    _drawerDetailsPosition = new Tween<Offset>(
-      begin: const Offset(0.0, -1.0),
-      end: Offset.zero,
-    ).animate(new CurvedAnimation(
-      parent: _controller,
-      curve: Curves.fastOutSlowIn,
-    ));
+    
     lista = new ListTabProductos();
     lista.addProducto(
       new Tab(
@@ -264,85 +234,7 @@ class _ProductosPageState extends State<ProductosPage>
         bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
         title: Text('Productos'),
       ),
-      drawer: new Drawer(
-        child: new Column(
-          children: <Widget>[
-            new UserAccountsDrawerHeader(
-              accountName: const Text('Juan Perez'),
-              accountEmail: const Text('juan.perez@example.com'),
-              currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage(_kAsset0),
-              ),
-              margin: EdgeInsets.zero,
-              onDetailsPressed: () {
-                _showDrawerContents = !_showDrawerContents;
-                if (_showDrawerContents)
-                  _controller.reverse();
-                else
-                  _controller.forward();
-              },
-            ),
-            new MediaQuery.removePadding(
-              context: context,
-              // DrawerHeader consumes top MediaQuery padding.
-              removeTop: true,
-              child: new Expanded(
-                child: new ListView(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  children: <Widget>[
-                    new Stack(
-                      children: <Widget>[
-                        // The initial contents of the drawer.
-                        new FadeTransition(
-                          opacity: _drawerContentsOpacity,
-                          child: new Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: lstMenu.map((OpcionMenu opcion) {
-                              return new ListTile(
-                                leading: new CircleAvatar(
-                                  backgroundColor: Colors.orange,
-                                    foregroundColor: Colors.white,
-                                    child: opcion.icono),
-                                title: new Text(opcion.etiqueta),
-                                onTap: opcion.onPressed,
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        // The drawer's "details" view.
-                        new SlideTransition(
-                          position: _drawerDetailsPosition,
-                          child: new FadeTransition(
-                            opacity:
-                                new ReverseAnimation(_drawerContentsOpacity),
-                            child: new Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                new ListTile(
-                                  leading: const Icon(Icons.add),
-                                  title: const Text('Agregar Cuenta'),
-                                  onTap:(){print("Agregar Cuenta clicked");} ,
-                                ),
-                                new ListTile(
-                                  leading: const Icon(Icons.settings),
-                                  title: const Text('Administrar cuentas'),
-                                  onTap:(){print("Administrar Cuenta clicked");},
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      drawer: new DrawerPage(),
       body: new TabBarView(
           controller: _tabController, children: lista.getElementos()),
       floatingActionButton: getFloatButton(),

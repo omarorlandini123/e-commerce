@@ -4,6 +4,8 @@ import 'package:ecommerce/entidades/OpcionMenu.dart';
 import 'package:ecommerce/entidades/Empresa.dart';
 import 'package:ecommerce/pages/ingreso_producto_page.dart';
 import 'package:ecommerce/pages/productos_page.dart';
+import 'package:ecommerce/entidades/TipoDocumento.dart';
+import 'package:ecommerce/entidades/TipoEmpresa.dart';
 import 'package:ecommerce/pages/items_page.dart';
 
 class MisEmpresasPage extends StatefulWidget {
@@ -114,7 +116,7 @@ class _MisEmpresasPageState extends State<MisEmpresasPage>
     empresas= new List<Empresa>(); 
     for(int y=0;y<50;y++){
       empresas.add(new Empresa("Empresa "+y.toString(), 
-      "Detalles empresa "+y.toString(), "DOC"+y.toString(),Empresa.TIPO_DOCUMENTO_DNI ,Empresa.TIPO_EMPRESA_PERSONAL));
+      "Detalles empresa "+y.toString(), "DOC"+y.toString(),TipoEmpresa.EMPRESA_PERSONAL));
     }
 
     lstMenu = new List<OpcionMenu>();

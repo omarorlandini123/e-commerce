@@ -10,7 +10,6 @@ import 'package:ecommerce/entidades/Producto.dart';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
 import 'package:ecommerce/entidades/FotoPreview.dart';
 
-const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';
 
 class ProductosPage extends StatefulWidget {
   static String tag = 'productos-page';
@@ -55,11 +54,7 @@ class _ProductosPageState extends State<ProductosPage>
       
   ListTabProductos lista;
   TabController _tabController;
-  bool mostrarBoton = true;
-  AnimationController _controller;
-  Animation<double> _drawerContentsOpacity;
-  Animation<Offset> _drawerDetailsPosition;
-  bool _showDrawerContents = true;
+  bool mostrarBoton = true; 
   
 
   List<OpcionMenu> lstMenu;
@@ -107,8 +102,6 @@ class _ProductosPageState extends State<ProductosPage>
   @override
   void initState() {
     super.initState();
-
-    
 
     tabController = new TabController(length: 3, vsync: this);
     

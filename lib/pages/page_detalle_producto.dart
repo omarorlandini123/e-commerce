@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'package:ecommerce/widgets/page_general_CajaTexto.dart';
 import 'package:ecommerce/pages/page_items_detalle.dart';
 import 'package:ecommerce/entidades/Producto.dart';
 import 'package:ecommerce/entidades/ItemAlmacen.dart';
@@ -29,7 +31,11 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
   Producto productoSel;
   ListTabItemsAlmacen lista;
   TabController _tabController;
-  final myController = TextEditingController();
+
+  CajaTexto txtNombre;
+  CajaTexto txtDetalle;
+  CajaTexto txtPrecio;
+  CajaTexto txtFecha;
 
   _DetalleProductoPageState([this.productoSel]);
 
@@ -136,6 +142,20 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
     super.initState();
     _date = productoSel.validez;
     print(productoSel.nombre);
+
+    txtNombre = new CajaTexto(productoSel.nombre, "Ingrese el nombre",
+        tamanoTexto, TipoCajaTexto.TEXTO);
+    txtDetalle = new CajaTexto(productoSel.descripcion,
+        "Ingrese el detalle del producto", tamanoTexto, TipoCajaTexto.TEXTO);
+    txtPrecio = new CajaTexto(productoSel.precio.toString(),
+        "Ingrese el detalle del producto", tamanoTexto, TipoCajaTexto.MONEDA);
+    txtFecha = new CajaTexto(
+        _date == null
+            ? "Sin límite"
+            : "Válido hasta: " + _date.toString().substring(0, 10),
+        "",
+        0.0,
+        TipoCajaTexto.FECHA);
 
     lista = new ListTabItemsAlmacen();
     lista.addItem(
@@ -248,33 +268,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
         ],
       ),
     );
-    final txtFecha = Container(
-      height: 43.0,
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black54,
-        ),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      padding: EdgeInsets.only(left: 23.0),
-      child: Row(
-        children: <Widget>[
-          Text(_date == null
-              ? "Sin límite"
-              : "Válido hasta: " + _date.toString().substring(0, 10)),
-          Expanded(
-              child: Container(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: Icon(Icons.calendar_today),
-                    onPressed: () {
-                      _selectDate(context);
-                    },
-                  )))
-        ],
-      ),
-    );
+
     lista.add(SizedBox(
       height: 25.0,
     ));
@@ -329,7 +323,9 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
                       colorFilter: new ColorFilter.mode(
                           Colors.black.withOpacity(1.0), BlendMode.dstATop),
                       image: fotoFondo == null
-                          ? prod.imagenPreview== null?new AssetImage("assets/imgs/hamburguesa.jpg"):prod.imagenPreview
+                          ? prod.imagenPreview == null
+                              ? new AssetImage("assets/imgs/hamburguesa.jpg")
+                              : prod.imagenPreview.imageProvider
                           : FileImage(fotoFondo),
                       fit: BoxFit.cover,
                     ),
@@ -356,19 +352,6 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
 
   @override
   Widget build(BuildContext context) {
-    final txtNombreProducto = TextFormField(
-      initialValue: productoSel.nombre,
-      style: TextStyle(
-          fontSize: tamanoTexto, color: Colors.black, fontFamily: "Arial"),
-      keyboardType: TextInputType.text,
-      autofocus: false,
-      decoration: InputDecoration(
-          labelText: "Nombre del Producto",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))),
-    );
-
     final txtDetalleProducto = TextFormField(
       initialValue: productoSel.descripcion,
       maxLines: 4,
@@ -453,8 +436,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
         ],
       ),
     );
-
-    if (productoSel.items == null || productoSel.items.length <=  1) {
+    if (productoSel.items == null || productoSel.items.length <= 1) {
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
@@ -478,79 +460,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
             ],
             title: Text("Producto"),
           ),
-          body: ListView(scrollDirection: Axis.vertical, children: <Widget>[
-            Hero(
-              tag: 'image-hero' + productoSel.nombre,
-              child: Container(
-                  constraints: new BoxConstraints.expand(
-                    height: MediaQuery.of(context).size.height * 0.25,
-                  ),
-                  alignment: Alignment.bottomLeft,
-                  padding: new EdgeInsets.only(bottom: 8.0),
-                  decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                      colorFilter: new ColorFilter.mode(
-                          Colors.black.withOpacity(1.0), BlendMode.dstATop),
-                      image: fotoFondo == null
-                          ? productoSel.imagenPreview == null?new AssetImage("assets/imgs/hamburguesa.jpg"):productoSel.imagenPreview 
-                          : FileImage(fotoFondo),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(6.0),
-                    constraints: BoxConstraints.tightForFinite(),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: MaterialButton(
-                      child: Icon(
-                        Icons.photo_camera,
-                        size: 24.0,
-                      ),
-                      onPressed: () {
-                        tomarFoto();
-                      },
-                    ),
-                  )),
-            ),
-            SizedBox(
-              height: 25.0,
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 25.0, left: 25.0),
-              child: Column(
-                children: <Widget>[
-                  txtNombreProducto,
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  txtDetalleProducto,
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  txtPrecio,
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(child: txtFecha),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  chkTerceros,
-                  SizedBox(
-                    height: 75.0,
-                  ),
-                ],
-              ),
-            )
-          ]),
+          body: getBodyIndividual(context),
           floatingActionButton: FloatingActionButton.extended(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(Icons.save),
@@ -596,6 +506,87 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
             icon: Icon(Icons.save),
             label: Text('Guardar'),
             onPressed: () {}));
+  }
+
+  Widget getBodyIndividual(BuildContext context) {
+
+     txtFecha.callback= (){_selectDate(context);};
+
+    return new ListView(scrollDirection: Axis.vertical, children: <Widget>[
+      Hero(
+        tag: 'image-hero' + productoSel.nombre,
+        child: Container(
+            constraints: new BoxConstraints.expand(
+              height: MediaQuery.of(context).size.height * 0.25,
+            ),
+            alignment: Alignment.bottomLeft,
+            padding: new EdgeInsets.only(bottom: 8.0),
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                colorFilter: new ColorFilter.mode(
+                    Colors.black.withOpacity(1.0), BlendMode.dstATop),
+                image: fotoFondo == null
+                    ? productoSel.imagenPreview == null
+                        ? new AssetImage("assets/imgs/image_not_found.png")
+                        : productoSel.imagenPreview.imageProvider
+                    : FileImage(fotoFondo),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(6.0),
+              constraints: BoxConstraints.tightForFinite(),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: MaterialButton(
+                child: Icon(
+                  Icons.photo_camera,
+                  size: 24.0,
+                ),
+                onPressed: () {
+                  tomarFoto();
+                },
+              ),
+            )),
+      ),
+      SizedBox(
+        height: 25.0,
+      ),
+      Padding(
+        padding: EdgeInsets.only(right: 25.0, left: 25.0),
+        child: Column(
+          children: <Widget>[
+            txtNombre,
+            SizedBox(
+              height: 25.0,
+            ),
+            txtDetalle,
+            SizedBox(
+              height: 25.0,
+            ),
+            txtPrecio,
+            SizedBox(
+              height: 25.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(child: txtFecha),
+              ],
+            ),
+            SizedBox(
+              height: 25.0,
+            ),
+            //chkTerceros,
+            SizedBox(
+              height: 75.0,
+            ),
+          ],
+        ),
+      )
+    ]);
   }
 }
 

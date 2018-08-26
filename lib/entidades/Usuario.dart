@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Persona.dart';
-import 'package:ecommerce/entidades/Archivo.dart';
+import 'package:Freeler/entidades/Persona.dart';
+import 'package:Freeler/entidades/Archivo.dart';
 class Usuario{
   int idUsuario;
   String codigoUsuario;

@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Usuario.dart';
-import 'package:ecommerce/entidades/Compra.dart';
+import 'package:Freeler/entidades/Usuario.dart';
+import 'package:Freeler/entidades/Compra.dart';
 class Cliente extends Usuario{
   int idCliente;
   String nroTelfRegistro;

@@ -1,5 +1,5 @@
-import'package:ecommerce/entidades/Local.dart';
-import 'package:ecommerce/entidades/Producto.dart';
+import'package:Freeler/entidades/Local.dart';
+import 'package:Freeler/entidades/Producto.dart';
 class Mostrador{
   int idMostrador;
   String nombre;

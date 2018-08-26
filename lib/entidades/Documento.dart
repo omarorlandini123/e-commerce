@@ -1,6 +1,6 @@
-import 'package:ecommerce/entidades/Persona.dart';
-import 'package:ecommerce/entidades/TipoDocumento.dart';
-import 'package:ecommerce/entidades/FotoDocumento.dart';
+import 'package:Freeler/entidades/Persona.dart';
+import 'package:Freeler/entidades/TipoDocumento.dart';
+import 'package:Freeler/entidades/FotoDocumento.dart';
 class Documento{
 
   int idDocumento;

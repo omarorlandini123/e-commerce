@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce/entidades/OpcionMenu.dart';
-import 'package:ecommerce/pages/page_pedidos.dart';
-import 'package:ecommerce/pages/page_mis_empresas.dart';
-import 'package:ecommerce/pages/page_items.dart';
-import 'package:ecommerce/pages/page_mis_contactos.dart';
+import 'package:Freeler/entidades/OpcionMenu.dart';
+import 'package:Freeler/pages/page_pedidos.dart';
+import 'package:Freeler/pages/page_mis_empresas.dart';
+import 'package:Freeler/pages/page_items.dart';
+import 'package:Freeler/pages/page_mis_contactos.dart';
 class DrawerPage extends StatefulWidget {
 
 

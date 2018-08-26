@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Ubicacion.dart';
-import 'package:ecommerce/entidades/Documento.dart';
+import 'package:Freeler/entidades/Ubicacion.dart';
+import 'package:Freeler/entidades/Documento.dart';
 class Persona{
   int idPersona;
   String nombre;

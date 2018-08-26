@@ -1,6 +1,6 @@
-import 'package:ecommerce/entidades/Empresa.dart';
-import 'package:ecommerce/entidades/Mostrador.dart';
-import 'package:ecommerce/entidades/Almacen.dart';
+import 'package:Freeler/entidades/Empresa.dart';
+import 'package:Freeler/entidades/Mostrador.dart';
+import 'package:Freeler/entidades/Almacen.dart';
 class Local {
   String nombre;
   String ubicacion;

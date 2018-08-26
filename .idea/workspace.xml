@@ -200,43 +200,43 @@
           <expand>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler" type="e9137016:NonAndroidModuleNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler" type="e9137016:NonAndroidModuleNode" />
               <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler" type="e9137016:NonAndroidModuleNode" />
               <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
               <item name="diseno" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler" type="e9137016:NonAndroidModuleNode" />
               <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
               <item name="entidades" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler" type="e9137016:NonAndroidModuleNode" />
               <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler" type="e9137016:NonAndroidModuleNode" />
               <item name="tests" type="f7eae187:NonAndroidSourceTypeNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce_android" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler_android" type="e9137016:NonAndroidModuleNode" />
             </path>
             <path>
               <item name="e-commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="ecommerce_android" type="e9137016:NonAndroidModuleNode" />
+              <item name="Freeler_android" type="e9137016:NonAndroidModuleNode" />
               <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
             </path>
           </expand>

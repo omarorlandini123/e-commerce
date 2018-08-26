@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Archivo.dart';
-import 'package:ecommerce/entidades/TipoArchivo.dart';
+import 'package:Freeler/entidades/Archivo.dart';
+import 'package:Freeler/entidades/TipoArchivo.dart';
 import 'package:flutter/material.dart';
 class FotoPreview extends Archivo{
     

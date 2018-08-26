@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce/widgets/page_items_BotonAgregarDefault.dart';
-import 'package:ecommerce/widgets/page_items_PreviewCard.dart';
+import 'package:Freeler/widgets/page_items_BotonAgregarDefault.dart';
+import 'package:Freeler/widgets/page_items_PreviewCard.dart';
 
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
-import 'package:ecommerce/entidades/Producto.dart';
-import 'package:ecommerce/entidades/Fotopreview.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
+import 'package:Freeler/entidades/Producto.dart';
+import 'package:Freeler/entidades/Fotopreview.dart';
 
-import 'package:ecommerce/pages/page_items_detalle.dart';
-import 'package:ecommerce/pages/page_detalle_producto.dart';
+import 'package:Freeler/pages/page_items_detalle.dart';
+import 'package:Freeler/pages/page_detalle_producto.dart';
 
 class ItemsPage extends StatefulWidget {
   static String tag = "items-page";

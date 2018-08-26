@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce/pages/page_pedidos.dart';
-import 'package:ecommerce/pages/page_ingreso_producto.dart';
-import 'package:ecommerce/pages/page_productos.dart';
-import 'package:ecommerce/pages/page_items.dart';
+import 'package:Freeler/pages/page_pedidos.dart';
+import 'package:Freeler/pages/page_ingreso_producto.dart';
+import 'package:Freeler/pages/page_productos.dart';
+import 'package:Freeler/pages/page_items.dart';
 
-import 'package:ecommerce/entidades/OpcionMenu.dart';
-import 'package:ecommerce/entidades/Empresa.dart';
-import 'package:ecommerce/entidades/TipoEmpresa.dart';
+import 'package:Freeler/entidades/OpcionMenu.dart';
+import 'package:Freeler/entidades/Empresa.dart';
+import 'package:Freeler/entidades/TipoEmpresa.dart';
 
 
 class MisEmpresasPage extends StatefulWidget {

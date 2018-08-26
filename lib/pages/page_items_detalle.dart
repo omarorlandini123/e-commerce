@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
-import 'package:ecommerce/entidades/Producto.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
+import 'package:Freeler/entidades/Producto.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ecommerce/pages/page_detalle_producto.dart';
+import 'package:Freeler/pages/page_detalle_producto.dart';
 
 class ItemsDetallePage extends StatefulWidget {
   static String tag = "item-detalle-page";

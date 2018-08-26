@@ -1,8 +1,8 @@
-import 'package:ecommerce/entidades/Local.dart';
-import 'package:ecommerce/entidades/CuentaBancaria.dart';
-import 'package:ecommerce/entidades/TipoEmpresa.dart';
-import 'package:ecommerce/entidades/Freeler.dart';
-import 'package:ecommerce/entidades/Ubicacion.dart';
+import 'package:Freeler/entidades/Local.dart';
+import 'package:Freeler/entidades/CuentaBancaria.dart';
+import 'package:Freeler/entidades/TipoEmpresa.dart';
+import 'package:Freeler/entidades/Freeler.dart';
+import 'package:Freeler/entidades/Ubicacion.dart';
 class Empresa {
 
   String nombre;

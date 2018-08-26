@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ecommerce/pages/page_login.dart';
-import 'package:ecommerce/pages/page_validar_numero.dart';
-import 'package:ecommerce/pages/page_registro.dart';
-import 'package:ecommerce/pages/page_productos.dart';
-import 'package:ecommerce/pages/page_pedidos.dart';
-import 'package:ecommerce/pages/page_ingreso_producto.dart';
-import 'package:ecommerce/pages/page_mis_empresas.dart';
-import 'package:ecommerce/pages/page_detalle_producto.dart';
-import 'package:ecommerce/pages/page_items.dart';
-import 'package:ecommerce/pages/page_items_detalle.dart';
-import 'package:ecommerce/pages/page_mis_contactos.dart';
+import 'package:Freeler/pages/page_login.dart';
+import 'package:Freeler/pages/page_validar_numero.dart';
+import 'package:Freeler/pages/page_registro.dart';
+import 'package:Freeler/pages/page_productos.dart';
+import 'package:Freeler/pages/page_pedidos.dart';
+import 'package:Freeler/pages/page_ingreso_producto.dart';
+import 'package:Freeler/pages/page_mis_empresas.dart';
+import 'package:Freeler/pages/page_detalle_producto.dart';
+import 'package:Freeler/pages/page_items.dart';
+import 'package:Freeler/pages/page_items_detalle.dart';
+import 'package:Freeler/pages/page_mis_contactos.dart';
 
 void main() => runApp(new MyApp());
 

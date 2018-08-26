@@ -1,4 +1,4 @@
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
 import 'package:flutter/material.dart';
 
 class PreviewCard extends StatelessWidget {

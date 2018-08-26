@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Local.dart';
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
+import 'package:Freeler/entidades/Local.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
 
 class Almacen {
   int idAlmacen;

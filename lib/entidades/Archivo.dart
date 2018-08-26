@@ -1,4 +1,4 @@
-import 'package:ecommerce/entidades/TipoArchivo.dart';
+import 'package:Freeler/entidades/TipoArchivo.dart';
 class Archivo{
     int idArchivo;
     String nombre;

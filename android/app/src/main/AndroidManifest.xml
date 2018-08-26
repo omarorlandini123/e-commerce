@@ -1,6 +1,6 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ecommerce">
+    package="com.example.Freeler">
     <!-- The INTERNET permission is required for development. Specifically,
          flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
@@ -18,7 +18,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="ecommerce"
+        android:label="Freeler"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

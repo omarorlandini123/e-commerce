@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Compra.dart';
-import 'package:ecommerce/entidades/Producto.dart';
+import 'package:Freeler/entidades/Compra.dart';
+import 'package:Freeler/entidades/Producto.dart';
 class CompraDetalle{
 
   int idCompraDetalle;

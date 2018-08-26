@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce/pages/page_productos.dart';
-import 'package:ecommerce/pages/page_mis_empresas.dart';
-import 'package:ecommerce/pages/page_items.dart';
+import 'package:Freeler/pages/page_productos.dart';
+import 'package:Freeler/pages/page_mis_empresas.dart';
+import 'package:Freeler/pages/page_items.dart';
 
-import 'package:ecommerce/entidades/OpcionMenu.dart';
+import 'package:Freeler/entidades/OpcionMenu.dart';
 
 
 const String _kAsset0 = 'assets/imgs/hamburguesa.jpg';

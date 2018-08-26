@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce/widgets/page_general_drawer.dart';
-import 'package:ecommerce/widgets/page_productos_ProductoCard.dart';
+import 'package:Freeler/widgets/page_general_drawer.dart';
+import 'package:Freeler/widgets/page_productos_ProductoCard.dart';
 
-import 'package:ecommerce/pages/page_items.dart';
+import 'package:Freeler/pages/page_items.dart';
 
-import 'package:ecommerce/entidades/OpcionMenu.dart';
-import 'package:ecommerce/entidades/Producto.dart';
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
-import 'package:ecommerce/entidades/FotoPreview.dart';
+import 'package:Freeler/entidades/OpcionMenu.dart';
+import 'package:Freeler/entidades/Producto.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
+import 'package:Freeler/entidades/FotoPreview.dart';
 
 
 class ProductosPage extends StatefulWidget {

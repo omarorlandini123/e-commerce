@@ -1,5 +1,5 @@
-import 'package:ecommerce/entidades/Banco.dart';
-import 'package:ecommerce/entidades/Empresa.dart';
+import 'package:Freeler/entidades/Banco.dart';
+import 'package:Freeler/entidades/Empresa.dart';
 
 class CuentaBancaria{
   int idCuentaBancaria;

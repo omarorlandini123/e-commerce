@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/pages/page_detalle_producto.dart';
-import 'package:ecommerce/entidades/Producto.dart';
+import 'package:Freeler/pages/page_detalle_producto.dart';
+import 'package:Freeler/entidades/Producto.dart';
 import 'package:share/share.dart';
 
 class ProductoCard extends StatelessWidget {

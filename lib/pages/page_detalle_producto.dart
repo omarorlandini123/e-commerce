@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import 'package:ecommerce/widgets/page_general_CajaTexto.dart';
-import 'package:ecommerce/pages/page_items_detalle.dart';
-import 'package:ecommerce/entidades/Producto.dart';
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
+import 'package:Freeler/widgets/page_general_CajaTexto.dart';
+import 'package:Freeler/pages/page_items_detalle.dart';
+import 'package:Freeler/entidades/Producto.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
 
 class DetalleProductoPage extends StatefulWidget {
   static String tag = 'detalle-product-page';

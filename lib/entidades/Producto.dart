@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/entidades/ItemAlmacen.dart';
-import 'package:ecommerce/entidades/Mostrador.dart';
-import 'package:ecommerce/entidades/FotoPreview.dart';
+import 'package:Freeler/entidades/ItemAlmacen.dart';
+import 'package:Freeler/entidades/Mostrador.dart';
+import 'package:Freeler/entidades/FotoPreview.dart';
 
 class Producto {
 

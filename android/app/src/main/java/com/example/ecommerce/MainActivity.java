@@ -1,4 +1,4 @@
-package com.example.ecommerce;
+package com.example.Freeler;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

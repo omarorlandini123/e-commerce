@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ecommerce/pages/page_registro.dart';
+import 'package:Freeler/pages/page_registro.dart';
 class ValidarNumeroPage extends StatefulWidget {
   static String tag = 'validar-numero-page';
   @override

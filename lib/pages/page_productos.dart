@@ -1,15 +1,19 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:Freeler/widgets/page_general_drawer.dart';
 import 'package:Freeler/widgets/page_productos_ProductoCard.dart';
+import 'package:Freeler/widgets/page_general_TabGeneral.dart';
 
 import 'package:Freeler/pages/page_items.dart';
 
-import 'package:Freeler/entidades/OpcionMenu.dart';
 import 'package:Freeler/entidades/Producto.dart';
 import 'package:Freeler/entidades/ItemAlmacen.dart';
 import 'package:Freeler/entidades/FotoPreview.dart';
-
 
 class ProductosPage extends StatefulWidget {
   static String tag = 'productos-page';
@@ -17,54 +21,31 @@ class ProductosPage extends StatefulWidget {
   _ProductosPageState createState() => _ProductosPageState();
 }
 
-class TabProductos {
-  Tab tab;
-  Widget elemento;
-  TabProductos(this.tab, this.elemento);
-}
-
-class ListTabProductos {
-  List<TabProductos> productos;
-  List<Tab> tabs;
-  List<Widget> elementos;
-
-  ListTabProductos() {
-    productos = new List<TabProductos>();
-    tabs = new List<Tab>();
-    elementos = new List<Widget>();
-  }
-
-  void addProducto(Tab tab, Widget elemento) {
-    productos.add(new TabProductos(tab, elemento));
-    tabs.add(tab);
-    elementos.add(elemento);
-  }
-
-  List<Tab> getTabs() {
-    return tabs;
-  }
-
-  List<Widget> getElementos() {
-    return elementos;
-  }
-}
-
 class _ProductosPageState extends State<ProductosPage>
     with TickerProviderStateMixin {
-      
-  ListTabProductos lista;
-  TabController _tabController;
-  bool mostrarBoton = true; 
-  
+  TabGeneral lista;
+  TabController tabController;
+  bool mostrarBoton = true;
 
-  List<OpcionMenu> lstMenu;
+  Future<List<Producto>> fetchProductos(http.Client client) async {
+    final response = await client.get('https://jsonplaceholder.typicode.com/photos');
+
+    return compute(parseProductos, response.body);
+  }
+  
+  List<Producto> parseProductos(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<Producto>((json) => Producto.fromJson(json)).toList();
+  }
 
   List<Widget> tarjetasListaTerceros() {
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
-      Producto prod = new Producto("Producto Terceros "+(i+1).toString(),"Detalles "+(i+1).toString(), 12.0,  true);
-      FotoPreview foto= new FotoPreview(0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
-      prod.imagenPreview= foto ;
+      Producto prod = new Producto("Producto Terceros " + (i + 1).toString(),
+          "Detalles " + (i + 1).toString(), 12.0, true);
+      FotoPreview foto = new FotoPreview(
+          0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+      prod.imagenPreview = foto;
       lista.add(new ProductoCard(prod));
     }
     return lista;
@@ -73,11 +54,13 @@ class _ProductosPageState extends State<ProductosPage>
   List<Widget> tarjetasLista() {
     List<Widget> lista = new List<Widget>();
     for (var i = 0; i < 15; i++) {
-      Producto prod = new Producto("Producto "+(i+1).toString(),"Detalles "+(i+1).toString(), 16.0, false, new DateTime.now());
-      FotoPreview foto= new FotoPreview(0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
-      prod.imagenPreview= foto ;
-      ItemAlmacen item = new ItemAlmacen("Item 1","detalle 1", 2.0);
-      ItemAlmacen item2 = new ItemAlmacen("Item 2","detalle 2", 33.0);
+      Producto prod = new Producto("Producto " + (i + 1).toString(),
+          "Detalles " + (i + 1).toString(), 16.0, false, new DateTime.now());
+      FotoPreview foto = new FotoPreview(
+          0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+      prod.imagenPreview = foto;
+      ItemAlmacen item = new ItemAlmacen("Item 1", "detalle 1", 2.0);
+      ItemAlmacen item2 = new ItemAlmacen("Item 2", "detalle 2", 33.0);
       prod.addItem(item);
       prod.addItem(item2);
       lista.add(new ProductoCard(prod));
@@ -98,15 +81,14 @@ class _ProductosPageState extends State<ProductosPage>
       return null;
   }
 
-
   @override
   void initState() {
     super.initState();
 
     tabController = new TabController(length: 3, vsync: this);
-    
-    lista = new ListTabProductos();
-    lista.addProducto(
+
+    lista = new TabGeneral();
+    lista.addTab(
       new Tab(
         text: 'Propios',
       ),
@@ -116,7 +98,7 @@ class _ProductosPageState extends State<ProductosPage>
         ),
       ),
     );
-    lista.addProducto(
+    lista.addTab(
         new Tab(text: 'Terceros'),
         new Container(
           child: ListView(
@@ -124,11 +106,11 @@ class _ProductosPageState extends State<ProductosPage>
           ),
         ));
 
-    _tabController =
+    tabController =
         new TabController(vsync: this, length: lista.getTabs().length);
-    _tabController.addListener(() {
+    tabController.addListener(() {
       this.setState(() {
-        if (_tabController.index == 1) {
+        if (tabController.index == 1) {
           mostrarBoton = false;
         } else {
           mostrarBoton = true;
@@ -139,24 +121,22 @@ class _ProductosPageState extends State<ProductosPage>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    tabController.dispose();
     super.dispose();
     tabController.dispose();
   }
-
-  TabController tabController;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        bottom: TabBar(controller: _tabController, tabs: lista.getTabs()),
+        bottom: TabBar(controller: tabController, tabs: lista.getTabs()),
         title: Text('Productos'),
       ),
       drawer: new DrawerPage(),
       body: new TabBarView(
-          controller: _tabController, children: lista.getElementos()),
+          controller: tabController, children: lista.getElementos()),
       floatingActionButton: getFloatButton(),
     );
   }

@@ -11,7 +11,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   contacts_service: ^0.0.8
   share: ^0.5.3
-  barcode_scan: "^0.0.4"
+  #barcode_scan: "^0.0.4"
   image_picker:
   
   

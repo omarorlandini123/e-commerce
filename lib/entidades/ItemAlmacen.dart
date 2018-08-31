@@ -9,6 +9,11 @@ class ItemAlmacen {
 
   ItemAlmacen(this.titulo, this.descripcion, this.cantidad,[this.imgURL, this.preview]);
 
+  void setPreview(){
+      if(imgURL!=null){
+        preview = NetworkImage(imgURL);    
+      }
+  }
   factory ItemAlmacen.fromJson(Map<String, dynamic> json) {
     ItemAlmacen item = ItemAlmacen(json['userId'], json['id'], json['title'],json['imgURL']);
     item.preview = NetworkImage("http://www.bsmc.net.au/wp-content/uploads/No-image-available.jpg");

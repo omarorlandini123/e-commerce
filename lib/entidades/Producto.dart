@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:Freeler/entidades/ItemAlmacen.dart';
 import 'package:Freeler/entidades/Mostrador.dart';
 import 'package:Freeler/entidades/FotoPreview.dart';

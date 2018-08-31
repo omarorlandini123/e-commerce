@@ -39,15 +39,15 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
 
   _DetalleProductoPageState([this.productoSel]);
 
-  Text etiqueta(String text) {
-    return Text(
-      text,
-      textAlign: TextAlign.left,
-      overflow: TextOverflow.ellipsis,
-      style: new TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),
-    );
-  }
+  // Text etiqueta(String text) {
+  //   return Text(
+  //     text,
+  //     textAlign: TextAlign.left,
+  //     overflow: TextOverflow.ellipsis,
+  //     style: new TextStyle(
+  //         fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),
+  //   );
+  // }
 
   DateTime _date;
 
@@ -96,7 +96,7 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
                       top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                   child: CircleAvatar(
                     radius: 35.0,
-                    backgroundImage: item.preview,
+                    backgroundImage: item.preview==null?AssetImage("assets/imgs/image_not_found.png"):item.preview,
                   ),
                 ),
               )),
@@ -114,20 +114,11 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
                       children: <Widget>[
                         Material(
                             child: Text(
-                          "pro",
+                          item.titulo,
                           style: TextStyle(fontSize: 16.0),
                         )),
                       ],
                     )),
-                    // Container(
-                    //     alignment: Alignment.centerRight,
-                    //     margin: EdgeInsets.only(
-                    //         top: 10.0, bottom: 10.0, right: 15.0),
-                    //     child: IconButton(
-                    //       icon: Icon(Icons.share),
-                    //       onPressed: () {},
-                    //       iconSize: 30.0,
-                    //     ))
                   ],
                 )),
           )

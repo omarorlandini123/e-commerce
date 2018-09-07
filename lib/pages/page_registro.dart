@@ -3,7 +3,7 @@ import 'page_productos.dart';
 //import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class RegistroPage extends StatefulWidget {
@@ -309,23 +309,23 @@ class _RegistroPageState extends State<RegistroPage> {
   File fotoFrontal2;
 
   Future tomarFoto2() async {
-    try {
-      File img = await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        fotoFrontal2 = img;
-      });
-    } catch (e) {}
+    // try {
+    //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    //   setState(() {
+    //     fotoFrontal2 = img;
+    //   });
+    // } catch (e) {}
   }
 
   File fotoFrontal;
 
   Future tomarFoto() async {
-    try {
-      File img = await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        fotoFrontal = img;
-      });
-    } catch (e) {}
+    // try {
+    //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    //   setState(() {
+    //     fotoFrontal = img;
+    //   });
+    // } catch (e) {}
   }
 
   Future scan() async {

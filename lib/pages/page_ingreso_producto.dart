@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Freeler/pages/page_detalle_producto.dart';
 import 'dart:async';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class IngresoProductoPage extends StatefulWidget {
@@ -130,12 +130,12 @@ class _IngresoProductoPageState extends State<IngresoProductoPage> {
   File fotoFondo;
 
   Future tomarFoto() async {
-    try {
-      File img = await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        fotoFondo = img;
-      });
-    } catch (e) {}
+    // try {
+    //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    //   setState(() {
+    //     fotoFondo = img;
+    //   });
+    // } catch (e) {}
   }
 
   @override

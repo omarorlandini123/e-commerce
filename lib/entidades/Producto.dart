@@ -19,13 +19,15 @@ class Producto {
       [this.validez, this.items]);
 
   factory Producto.fromJson(Map<String, dynamic> json) {
-    Producto item =
-        Producto(json['nombre'], json['descripcion'], json['precio'], json['esTercerizable'],json['validez']);
-    item.items = json['items'];
+    Producto item = Producto(
+        json['producto_nombre'],
+        json['producto_descripcion'],
+        json['producto_descripcion'],
+        json['producto_es_tercerizable'],
+        json['producto_valido_hasta']);
+
     return item;
   }
-
-  
 
   void addItem(ItemAlmacen item) {
     if (items == null) {

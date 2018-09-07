@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:Freeler/entidades/ItemAlmacen.dart';
 import 'package:Freeler/entidades/Producto.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:Freeler/pages/page_detalle_producto.dart';
 
 class ItemsDetallePage extends StatefulWidget {
@@ -47,12 +47,12 @@ class _ItemsDetallePageState extends State<ItemsDetallePage> {
   }
 
   Future tomarFoto() async {
-    try {
-      File img = await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        fotoFondo = img;
-      });
-    } catch (e) {}
+    // try {
+    //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    //   setState(() {
+    //     fotoFondo = img;
+    //   });
+    // } catch (e) {}
   }
 
   bool editando = false;

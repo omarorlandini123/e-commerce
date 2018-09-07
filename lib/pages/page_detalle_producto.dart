@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:Freeler/widgets/page_general_CajaTexto.dart';
@@ -178,12 +178,12 @@ class _DetalleProductoPageState extends State<DetalleProductoPage>
   File fotoFondo;
 
   Future tomarFoto() async {
-    try {
-      File img = await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        fotoFondo = img;
-      });
-    } catch (e) {}
+    // try {
+    //   File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    //   setState(() {
+    //     fotoFondo = img;
+    //   });
+    // } catch (e) {}
   }
 
   List<Widget> body() {

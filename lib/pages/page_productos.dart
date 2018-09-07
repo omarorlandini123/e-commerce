@@ -27,9 +27,8 @@ class _ProductosPageState extends State<ProductosPage>
   TabController tabController;
   bool mostrarBoton = true;
 
-  Future<List<Producto>> fetchProductos(http.Client client) async {
-    final response = await client.get('https://jsonplaceholder.typicode.com/photos');
-
+  Future<List<Producto>> fetchProductos() async {
+    final response = await http.get('http://test.exac-tic.com/Producto');
     return compute(parseProductos, response.body);
   }
   
@@ -47,6 +46,14 @@ class _ProductosPageState extends State<ProductosPage>
           0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
       prod.imagenPreview = foto;
       lista.add(new ProductoCard(prod));
+    }
+    return lista;
+  }
+
+  List<Widget> tarjetasListaParse(List<Producto> productosHttp) {
+    List<Widget> lista = new List<Widget>();
+    for (var i = 0; i < productosHttp.length; i++) {     
+      lista.add(new ProductoCard(productosHttp[i]));
     }
     return lista;
   }
@@ -117,6 +124,10 @@ class _ProductosPageState extends State<ProductosPage>
         }
       });
     });
+
+    fetchProductos().then((val) => setState(() {
+          tarjetasListaParse(val);
+        }));
   }
 
   @override

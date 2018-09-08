@@ -22,10 +22,10 @@ class Producto {
     Producto item = Producto(
         json['producto_nombre'],
         json['producto_descripcion'],
-        json['producto_descripcion'],
-        json['producto_es_tercerizable'],
+        double.parse(json['producto_precio']),
+        json['producto_es_tercerizable']==1,
         json['producto_valido_hasta']);
-
+    
     return item;
   }
 

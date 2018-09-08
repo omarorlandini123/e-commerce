@@ -11,6 +11,8 @@ import 'package:Freeler/widgets/page_general_TabGeneral.dart';
 
 import 'package:Freeler/pages/page_items.dart';
 
+import 'package:Freeler/Comunes/Constantes.dart';
+
 import 'package:Freeler/entidades/Producto.dart';
 import 'package:Freeler/entidades/ItemAlmacen.dart';
 import 'package:Freeler/entidades/FotoPreview.dart';
@@ -28,14 +30,12 @@ class _ProductosPageState extends State<ProductosPage>
   bool mostrarBoton = true;
 
   Future<List<Producto>> fetchProductos() async {
-    final response = await http.get('http://test.exac-tic.com/Producto');
-    return compute(parseProductos, response.body);
-  }
-  
-  List<Producto> parseProductos(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    final response = await http.get(Constantes.server + 'Producto');
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     return parsed.map<Producto>((json) => Producto.fromJson(json)).toList();
   }
+
+ 
 
   List<Widget> tarjetasListaTerceros() {
     List<Widget> lista = new List<Widget>();
@@ -52,26 +52,36 @@ class _ProductosPageState extends State<ProductosPage>
 
   List<Widget> tarjetasListaParse(List<Producto> productosHttp) {
     List<Widget> lista = new List<Widget>();
-    for (var i = 0; i < productosHttp.length; i++) {     
+    for (var i = 0; i < productosHttp.length; i++) {
       lista.add(new ProductoCard(productosHttp[i]));
     }
     return lista;
   }
 
-  List<Widget> tarjetasLista() {
+  List<Widget> tarjetasLista(List<Producto> listaProd) {
     List<Widget> lista = new List<Widget>();
-    for (var i = 0; i < 15; i++) {
-      Producto prod = new Producto("Producto " + (i + 1).toString(),
-          "Detalles " + (i + 1).toString(), 16.0, false, new DateTime.now());
-      FotoPreview foto = new FotoPreview(
-          0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
-      prod.imagenPreview = foto;
-      ItemAlmacen item = new ItemAlmacen("Item 1", "detalle 1", 2.0);
-      ItemAlmacen item2 = new ItemAlmacen("Item 2", "detalle 2", 33.0);
-      prod.addItem(item);
-      prod.addItem(item2);
-      lista.add(new ProductoCard(prod));
+    if (listaProd!=null && listaProd.length > 0) {
+      for (var i = 0; i < listaProd.length; i++) {
+        FotoPreview foto = new FotoPreview(
+            0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+        listaProd[i].imagenPreview = foto;
+        lista.add(new ProductoCard(listaProd[i]));
+      }
+    } else {
+      for (var i = 0; i < 15; i++) {
+        Producto prod = new Producto("Producto " + (i + 1).toString(),
+            "Detalles " + (i + 1).toString(), 16.0, false, new DateTime.now());
+        FotoPreview foto = new FotoPreview(
+            0, 'nombre', 'jpeg', new AssetImage("assets/imgs/pollito.jpeg"));
+        prod.imagenPreview = foto;
+        ItemAlmacen item = new ItemAlmacen("Item 1", "detalle 1", 2.0);
+        ItemAlmacen item2 = new ItemAlmacen("Item 2", "detalle 2", 33.0);
+        prod.addItem(item);
+        prod.addItem(item2);
+        lista.add(new ProductoCard(prod));
+      }
     }
+
     return lista;
   }
 
@@ -92,6 +102,14 @@ class _ProductosPageState extends State<ProductosPage>
   void initState() {
     super.initState();
 
+    asignarDatosTarjeta(null);
+
+    fetchProductos().then((val) => setState(() {
+          asignarDatosTarjeta(val);
+        }));
+  }
+
+  void asignarDatosTarjeta(List<Producto> productos) {
     tabController = new TabController(length: 3, vsync: this);
 
     lista = new TabGeneral();
@@ -101,7 +119,7 @@ class _ProductosPageState extends State<ProductosPage>
       ),
       new Container(
         child: ListView(
-          children: tarjetasLista(),
+          children: tarjetasLista(productos),
         ),
       ),
     );
@@ -124,10 +142,6 @@ class _ProductosPageState extends State<ProductosPage>
         }
       });
     });
-
-    fetchProductos().then((val) => setState(() {
-          tarjetasListaParse(val);
-        }));
   }
 
   @override
